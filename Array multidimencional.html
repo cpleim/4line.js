@@ -4,7 +4,7 @@
 +Crea automaticamente el array de 7x7
 +Se muestra en la consola el numero en la fila y columna indicada
 +Calcula la suma de los valores de la fila indicada
-*Todavía falta hacer que calcule la columna indicada
+*Calcula la suma de los valores de la columna, pero no el indice 0
 -->
 <head>
     <title>Arreglos multidimencional</title>
@@ -53,20 +53,26 @@
                 }
                 console.log(numerosFila);
                 console.log(suma);
-
             });
             $("#sumarColumna").click(function() {
                 var suma = 0
                 var columna = parseInt($("#columna").val());
+                var fila = parseInt($("#fila").val());
                 evaluarRangos()
                 if ($("#columna").val() == "") {
+                    columna = 0;
+                }
+                if ($("#fila").val() == "") {
                     fila = 0;
                 }
-                for (var i = 0; i < 7; i++) {
-                    console.log("[COMENZANDO EN FILA " + i + "] --> " + tablero[i])
-                    for (var j = 0; j < 7; j++) {
+                for (var j = 0; j < columna; j++) {
+                    console.log("[COMENZANDO EN FILA " + j + "] --> " + tablero[j])
+                    j = columna;
+                    for (var i = 0; i < tablero.length; i++) {
                         console.log("[POS PUNTERO] --> {" + tablero[i][j] + "} i en (" + i + ") " + "j en (" + j + ")")
+                        suma = suma + tablero[i][j]
                     }
+                    console.log(suma)
                 }
                 /*
                 ---OUTPUTS---
@@ -75,10 +81,11 @@
                 tablero[i] -> Devuelve toda la fila actual
                 tablero[i][j] -> Devuelve un unico numero de la fila actual recorrida (POS PUNTERO) 🤔
                 tablero[j] -> No existe. No insistas.
+                ---OUTPUTS---
                 */
 
                 /*
-                NOTA: Para el calculo de diagonales, hacer "shifteo en L" de ambos indices, moviendo primero j hacia abajo y luego i.
+                NOTA: Para el calculo de diagonales, hacer "shifteo en L" de ambos indices, moviendo primero j hacia abajo y luego i hacia la derecha o izquierda.
                 */
 
             });
@@ -98,7 +105,7 @@
             });
 
             function evaluarRangos() {
-               //Esto está roto... creo *REVISAR* 
+                //Esto está roto... creo *REVISAR* 
                 //Check de rangos
                 if (fila > 6 || columna > 6 && fila < 0 || columna < 0) {
                     alert("Fuera de rango!");

@@ -4,8 +4,9 @@
 +Crea automaticamente el array de 7x7
 +Se muestra en la consola el numero en la fila y columna indicada
 +Calcula la suma de los valores de la fila indicada
-*Calcula la suma de los valores de la columna, pero no el indice 0
++Calcula la suma de los valores de la columna indicada
 -->
+
 <head>
     <title>Arreglos multidimencional</title>
     <script src="jquery-3.3.1.js"></script>
@@ -43,7 +44,7 @@
             $("#sumarFila").click(function() {
                 var suma = 0
                 var fila = parseInt($("#fila").val());
-                evaluarRangos()
+                fila = fila - 1;
                 if ($("#fila").val() == "") {
                     fila = 0;
                 }
@@ -57,14 +58,29 @@
             $("#sumarColumna").click(function() {
                 var suma = 0
                 var columna = parseInt($("#columna").val());
+                columna = columna - 1;
                 var fila = parseInt($("#fila").val());
-                evaluarRangos()
                 if ($("#columna").val() == "") {
                     columna = 0;
                 }
                 if ($("#fila").val() == "") {
                     fila = 0;
                 }
+                for (var i = 0; i < tablero.length; i++) {
+                    console.log("[CAMBIO DE FILA]")
+                    for (var p = 0; p < tablero.length; p++) {
+                        if ($("#columna").val() == p) {
+                            suma = suma + tablero[i][p] - 1;
+                            console.log("Blep! {" + tablero[i][p] + "}")
+                        }
+                        console.log(tablero[i][p]);
+
+                    }
+
+                }
+                console.log("Total de la columna =" + suma);
+                //console.log(tablero[i][j]);
+                /*
                 for (var j = 0; j < columna; j++) {
                     console.log("[COMENZANDO EN FILA " + j + "] --> " + tablero[j])
                     j = columna;
@@ -74,6 +90,7 @@
                     }
                     console.log(suma)
                 }
+                */
                 /*
                 ---OUTPUTS---
                 *Siendo: tablero[fila][columna]*

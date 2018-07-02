@@ -1,23 +1,41 @@
 <!DOCTYPE html>
-<html lang="es" >
-	<head>
-		<meta charset="UTF-8">
-		<title>4Line - Nueva Partida</title>
-		<link rel="shortcut icon" href="assets/4LineBanner.gif"/>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-		<link rel='stylesheet prefetch' href='css/ewxggx.css'>
-		<link rel="stylesheet" href="css/style.css">
-		
-	</head>
-	<body>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>4Line - Nueva Partida</title>
+    <link rel="shortcut icon" href="assets/4LineBanner.gif" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
+    <link rel='stylesheet prefetch' href='css/ewxggx.css'>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    
 		<script src='https://rawgit.com/juliangarnier/anime/master/anime.min.js'></script>
 		<script  src="js/bgGenerator.js"></script>
-		<div id='contenedor_banner' align="center">
-            <p></p>
-            <img src="assets/4LineBanner.gif" width="600" height="200">
-        </div>
-        <div id='contenedor_login' align="center">
-        	<img src="assets/divLogin.png" width="400" height="600">
-        </div>
-	</body>
+		
+    <div id='contenedor_banner' align="center">
+        <img src="assets/4LineBanner.gif" width="600" height="200">
+    </div>
+    <div id="contenedor_controles" align="center">
+        <p>Ingrese los nombres de los jugadores</p>
+        <br>Jugador 1: <input type="text" id="jugador1"></input>
+        </br>
+        <br>Jugador 2: <input type="text" id="jugador2"></input>
+        </br>
+        <br><button>Comenzar nueva partida!</button>
+        <p></p>
+        <br>Deseas continuar tu partida anterior? 
+        <br>Ingresa tu código de juego!
+        <br><br>Codigo de juego: <input type="text" id="gameID"></input>
+        </br>
+        <br><button>Continuar juego</button>
+    </div>
+    <div id='contenedor_login'>
+        <img src="assets/divLogin.png" width="400" height="500">
+    </div>
+</body>
+
 </html>

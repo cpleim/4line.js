@@ -12,11 +12,14 @@
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript">
         var gamesSessions = [];
-        var player1Name;
-        var player2Name;
-        var gameCode;
+        var inUseGameIDs = [];
+        var player1Name, player2Name, gameCode, generatedGameID;
         $(document).ready(function() {
             $("#newGame").click(function() {
+                if ($("#jugador1").val() == "" || $("#jugador2").val() == "") {
+                    alert("Ingrese los nombres de los dos jugadores!");
+                    return;
+                }
                 gamesSessions.push({
                     currentGameSession: {
                         gameID: Math.random().toString(36).slice(2),
@@ -26,22 +29,30 @@
                         }
                     }
                 });
+                generatedGameID = gamesSessions[0].currentGameSession.gameID;
+                inUseGameIDs.push(generatedGameID);
+                localStorage.setItem("4line_games_sessions_ID:" + generatedGameID, JSON.stringify(gamesSessions));
+                console.log("[4Line]--> STORED IN LOCALSTORAGE!");
+                //Para traer las sesiones de juego desde el local storage
+                //var storedSessions = JSON.parse(localStorage.getItem("4line_games_sessions"));
             });
+
         });
 
         $(document).ready(function() {
             $("#resumeGame").click(function() {
                 gameCode = $("#resumeGameID").val();
+                if ($("#resumeGameID").val() == "") {
+                    alert("Ingresa el código de juego para continuar!");
+                    return;
+                }
                 for (var i = 0; i < gamesSessions.length; i++) {
                     if (gameCode == gamesSessions[i].currentGameSession.gameID) {
                         alert("Found it!");
-                        console.log("GAME ID: "+gamesSessions[i].currentGameSession.gameID);
-                        console.log("PLAYER 1 NAME: "+gamesSessions[i].currentGameSession.setupData.player1Name);
-                        console.log("PLAYER 2 NAME: "+gamesSessions[i].currentGameSession.setupData.player2Name);
+                        console.log("GAME ID: " + gamesSessions[i].currentGameSession.gameID);
+                        console.log("PLAYER 1 NAME: " + gamesSessions[i].currentGameSession.setupData.player1Name);
+                        console.log("PLAYER 2 NAME: " + gamesSessions[i].currentGameSession.setupData.player2Name);
                         return;
-                    }
-                    else if (i = gamesSessions.length){
-                    	alert("No se ha encontrado el código de la partida :(");
                     }
                 }
             });

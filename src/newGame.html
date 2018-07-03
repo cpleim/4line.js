@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <title>4Line - Nueva Partida</title>
     <link rel="shortcut icon" href="assets/4LineBanner.gif" />
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script><!--jQuery-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
     <link rel='stylesheet prefetch' href='css/ewxggx.css'>
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript">
@@ -31,10 +29,13 @@
                 });
                 generatedGameID = gamesSessions[0].currentGameSession.gameID;
                 inUseGameIDs.push(generatedGameID);
+                sessionStorage.setItem("4line_current_session_ID",generatedGameID);
                 localStorage.setItem("4line_games_sessions_ID:" + generatedGameID, JSON.stringify(gamesSessions));
                 console.log("[4Line]--> STORED IN LOCALSTORAGE!");
+                var gameURL = "currentGame.html";
+  				document.location.href = gameURL;
                 //Para traer las sesiones de juego desde el local storage
-                //var storedSessions = JSON.parse(localStorage.getItem("4line_games_sessions"));
+                //var storedSessions = JSON.parse(localStorage.getItem("4line_games_sessions_ID:"+id del juego));
             });
 
         });

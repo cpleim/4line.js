@@ -7,23 +7,39 @@
     <link rel="shortcut icon" href="assets/4LineBanner.gif" />
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
     <link rel='stylesheet prefetch' href='css/ewxggx.css'>
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript">
+        var gameIDKey, storedGames;
         $(document).ready(function() {
             $("#removeFromLocalStorage").click(function() {
-                localStorageKey = $("#localStorageKey").val();
+                var localStorageKey = $("#localStorageKey").val();
                 var msg;
-                var confirmDeleteFromLocalStorage = confirm("ADVERTENCIA: Está a punto de eliminar los datos del localstorage.\nEsto no se puede deshacer.\nDesa continuar?");
+                var confirmDeleteFromLocalStorage = confirm("ADVERTENCIA: Está a punto de eliminar los datos del localStorage.\nEsto no se puede deshacer.\nDesa continuar?");
                 if (confirmDeleteFromLocalStorage == true) {
-                    msg = "Eliminado";
+                    msg = "[CONSOLE]--> Eliminado";
                     localStorage.removeItem(localStorageKey);
                     console.log(msg);
                 } else {
-                    msg = "Accion cancelada";
+                    msg = "[CONSOLE]--> Accion cancelada";
                     console.log(msg);
                 }
+            });
+        });
+        $(document).ready(function() {
+            $("#retrieveFromLocalStorage").click(function() {
+                gameIDKey = $("#gameIDKey").val();
+                storedGames = JSON.parse(localStorage.getItem("4line_games_sessions_ID:" + gameIDKey));
+                if(localStorage.length == 0){
+                    alert("Aún no hay ningún dato almacenado en el localStorage :(");
+                    return;
+                }
+                if (storedGames == null) {
+                    alert("gameID no encontrado!");
+                } else {
+                    console.log(storedGames);
+                }
+
             });
         });
     </script>
@@ -38,11 +54,16 @@
         <img src="assets/4LineBanner.gif" width="600" height="200">
     </div>
     <div id="contenedor_controles" align="center">
-        PANEL DE DEPURACIÓN
-        <p>---Eliminar de localstorage---</p>
-        <br>localstorage key: <input type="text" id="localStorageKey"></input>
+        <p>PANEL DE DEPURACIÓN</p>
+        <p>---Eliminar de localStorage---</p>
+        <br>localStorage Key: <input type="text" id="localStorageKey"></input>
         </br>
         <br><button id="removeFromLocalStorage">Eliminar!</button></br>
+        <p></p>
+        <p>---Mostrar datos en localStorage---</p>
+        <br>gameID: <input type="text" id="gameIDKey"></input>
+        </br>
+        <br><button id="retrieveFromLocalStorage">Mostrar</button></br>
         <p></p>
     </div>
     <div id='contenedor_login'>

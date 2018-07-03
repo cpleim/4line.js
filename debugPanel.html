@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>4Line - PANEL DE DEPURACION</title>
+    <link rel="shortcut icon" href="assets/4LineBanner.gif" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
+    <link rel='stylesheet prefetch' href='css/ewxggx.css'>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#removeFromLocalStorage").click(function() {
+                localStorageKey = $("#localStorageKey").val();
+                var msg;
+                var confirmDeleteFromLocalStorage = confirm("ADVERTENCIA: Está a punto de eliminar los datos del localstorage.\nEsto no se puede deshacer.\nDesa continuar?");
+                if (confirmDeleteFromLocalStorage == true) {
+                    msg = "Eliminado";
+                    localStorage.removeItem(localStorageKey);
+                    console.log(msg);
+                } else {
+                    msg = "Accion cancelada";
+                    console.log(msg);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <!--
+    <script src='https://rawgit.com/juliangarnier/anime/master/anime.min.js'></script>
+    <script src="js/bgGenerator.js"></script>
+-->
+    <div id='contenedor_banner' align="center">
+        <img src="assets/4LineBanner.gif" width="600" height="200">
+    </div>
+    <div id="contenedor_controles" align="center">
+        PANEL DE DEPURACIÓN
+        <p>---Eliminar de localstorage---</p>
+        <br>localstorage key: <input type="text" id="localStorageKey"></input>
+        </br>
+        <br><button id="removeFromLocalStorage">Eliminar!</button></br>
+        <p></p>
+    </div>
+    <div id='contenedor_login'>
+        <img src="assets/divLogin.png" width="400" height="500">
+    </div>
+</body>
+
+</html>

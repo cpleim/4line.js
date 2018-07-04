@@ -44,3 +44,27 @@ body {
     border: 3px solid #272828;
     padding: 10px;
 }
+
+
+#boardBody {
+    border-collapse: collapse;
+    width: 50%;
+}
+
+#boardBody td, #boardBody th {
+    border: 1px solid #333333;
+    padding: 35px;
+    text-align: center;
+}
+
+#boardBody tr:nth-child(even){background-color: #595959;}
+
+#boardBody tr:hover {background-color: #333333;}
+
+#boardBody th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #000000;
+    color: white;
+}

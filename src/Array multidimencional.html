@@ -9,7 +9,7 @@
 
 <head>
     <title>Arreglos multidimencional</title>
-    <script src="jquery-3.3.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script><!--jQuery-->
     <script>
         var tablero = [
             [],
@@ -18,7 +18,6 @@
             [],
             [],
             [],
-            []
         ];
         var numeroPos = 0;
         var numerosFila = 0;
@@ -113,8 +112,8 @@
                 //console.log(JSON.stringify(tablero));
                 }
                 */
-                for (var i = 0; i < 7; i++) {
-                    for (var j = 0; j < 7; j++) {
+                for (var i = 0; i < 6; i++) {
+                    for (var j = 0; j < 6; j++) {
                         numeroPos = numeroPos + 1
                         tablero[i][j] = numeroPos;
                     }

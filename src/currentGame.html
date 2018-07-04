@@ -1,54 +1,102 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <title>4Line - Nueva Partida</title>
-        <link rel="shortcut icon" href="assets/4LineBanner.gif" />
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-        <!--jQuery-->
-        <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
-        <!--Popmotion-->
-        <script type="text/javascript" src="js/lib/easytimer.js"></script>
-        <!--easytimer.js-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-        <link rel='stylesheet prefetch' href='css/ewxggx.css'>
-        <link rel="stylesheet" href="css/style.css">
-        <script type="text/javascript" src="js/gameManager.js">
-        </script>
-    </head>
-    <body>
-<!--
+
+<head>
+    <meta charset="UTF-8">
+    <title>4Line - Nueva Partida</title>
+    <link rel="shortcut icon" href="assets/4LineBanner.gif" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <!--jQuery-->
+    <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
+    <!--Popmotion-->
+    <script type="text/javascript" src="js/lib/easytimer.js"></script>
+    <!--easytimer.js-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet prefetch' href='css/ewxggx.css'>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/gameManager.js">
+    </script>
+</head>
+
+<body>
+    <!--
         <script src='https://rawgit.com/juliangarnier/anime/master/anime.min.js'></script>
         <script src="js/bgGenerator.js"></script>
         -->
-        <div id='contenedor_banner' align="center">
-            <img src="assets/4LineBanner.gif" width="300" height="100">
-        </div>
-        <div id="contenedor_jugadores">
-            <p>Jugadores</p>
-            <p id="jugador1"></p>
-            <p id="jugador2"></p>
-            <br>------------------------</br>
-            <p>Tiempo transcurrido</p>
-            <div id=currentTime>00:00:00</div>
-            <br>------------------------</br>
-            <p>Identificador de partida</p>
-            <p id=currentSessionID></p>
-            <br>------------------------</br>
-        </div>
-        
-        <div id='board' align="center">
-           <table id='boardBody'>
-                        <!--
-                        <tr>
-                            <th>0</th>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                        </tr>
-                    </table>
-        </div>
-    </body>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#Ficha1').click(function() {
+                // alert('hola');
+                var imgArray = new Array();
+                imgArray[0] = new Image();
+                imgArray[0].src = 'assets/Ficha1.png';
+                tablero[0][0] = imgArray[0].src;
+            });
+        });
+        $(document).ready(function() {
+            $('#refrescarTabla').click(function() {
+                var tabla = document.getElementById("boardBody");
+                var cont = tabla.rows.length;
+                for (var i = cont - 1; i > -1; i--) {
+                    tabla.deleteRow(i);
+                }
+                var boardBody = document.getElementById("boardBody");
+                var contador = 0;
+                cont = 0;
+                for (var i = 0; i < tablero.length; i++) {
+                    contador = 0;
+
+                    var fila = boardBody.insertRow(cont);
+                    for (var j = 0; j < 6; j++) {
+                        var cont = boardBody.rows.length;
+                        var celda = fila.insertCell(contador);
+                        celda.innerText = tablero[i][j];
+                        contador++;
+                    }
+                }
+            });
+        });
+    </script>
+    <div id='contenedor_banner' align="center">
+        <img src="assets/4LineBanner.gif" width="300" height="100">
+    </div>
+    <div id="contenedor_jugadores">
+        <p>Jugadores</p>
+        ------------------------ Jugador 1:
+        <p id="jugador1"></p>
+        Jugador 2:
+        <p id="jugador2"></p>
+        <br>------------------------</br>
+        <p>Tiempo transcurrido</p>
+        <div id=currentTime>00:00:00</div>
+        <br>------------------------</br>
+        <p>Identificador de partida</p>
+        <p id=currentSessionID></p>
+        <br>------------------------</br>
+        <button id='refrescarTabla'>Refrescar Tabla</button>
+
+    </div>
+    <div id='board' align="center">
+
+        <img id='Ficha1' src="assets/Ficha1.png" width="104" height="74">
+        <img id='Ficha1' src="assets/Ficha1.png" width="104" height="74">
+        <img id='Ficha1' src="assets/Ficha1.png" width="104" height="74">
+        <img id='Ficha1' src="assets/Ficha1.png" width="104" height="74">
+        <img id='Ficha1' src="assets/Ficha1.png" width="104" height="74">
+        <img id='Ficha1' src="assets/Ficha1.png" width="104" height="74">
+        <table id='boardBody'>
+            <!--
+                <tr>
+                    <th>0</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                </tr>
+            </table>
+            -->
+    </div>
+</body>
+
 </html>

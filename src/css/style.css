@@ -46,25 +46,36 @@ body {
 }
 
 
-#boardBody {
-    border-collapse: collapse;
-    width: 44%;
-}
-
 #boardBody td, #boardBody th {
-    border: 8px solid #333333;
-    padding: 25px;
+    border: 3px solid #F0F0F0;
+    padding: 5px;
     text-align: center;
 }
 
-#boardBody tr:nth-child(even){background-color: #595959;}
 
-#boardBody tr:hover {background-color: #333333;}
+#alignRight {
+    height: 500%;
+    float: right;
+    width: 70%;
+}
 
-#boardBody th {
-    padding-top: 6px;
-    padding-bottom: 6px;
-    text-align: center;
-    background-color: #000000;
-    color: white;
+#alignLeft{
+    height: 500%;
+    float: left;
+    width: 70%;
+}
+
+#ficha0,#ficha1,#ficha2,#ficha3,#ficha4,#ficha5{
+  width: 80px;
+  height: 80px;
+}
+
+
+.btnFichas{
+  background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
 }

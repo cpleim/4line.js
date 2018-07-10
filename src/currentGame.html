@@ -26,29 +26,12 @@
     <script>
         $(document).ready(function() {
             $('#refrescarTabla').click(function() {
-                var tabla = document.getElementById("boardBody");
-                var cont = tabla.rows.length;
-                for (var i = cont - 1; i > -1; i--) {
-                    tabla.deleteRow(i);
-                }
-                var boardBody = document.getElementById("boardBody");
-                var contador = 0;
-                cont = 0;
-                for (var i = 0; i < tablero.length; i++) {
-                    contador = 0;
-                    var fila = boardBody.insertRow(cont);
-                    for (var j = 0; j < 6; j++) {
-                        var cont = boardBody.rows.length;
-                        var celda = fila.insertCell(contador);
-                        celda.innerHTML = tablero[i][j];
-                        contador++;
-                    }
-                }
+                reloadGameBoard();
             });
         });
     </script>
     <div id='contenedor_banner' align="center">
-        <img src="assets/4LineBanner.gif" width="300" height="100">
+        <img src="assets/4LineBanner.gif" width="410" height="160">
     </div>
     <div id="contenedor_jugadores">
         <p>Jugadores</p>
@@ -157,140 +140,6 @@
                 </tr>
             </table>
     </div>
-
-    <script>
-        var btnSrc;
-        var buttonState = 0;
-        $(document).ready(function() {
-            $('#buttonFichas0').click(function() {
-                btnSrc = $('img[alt="btnFichas0"]').attr('src');
-                //console.log("btnFichas0= " + btnSrc);
-                if (buttonState == 0) {
-                    $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
-                    buttonState = 1;
-                } else {
-                    $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
-                    buttonState = 0;
-                }
-
-            });
-            $('#buttonFichas1').click(function() {
-                btnSrc = $('img[alt="btnFichas1"]').attr('src');
-                //console.log("btnFichas1= " + btnSrc);
-                if (buttonState == 0) {
-                    $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
-                    buttonState = 1;
-                } else {
-                    $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
-                    buttonState = 0;
-                }
-            });
-            $('#buttonFichas2').click(function() {
-                btnSrc = $('img[alt="btnFichas2"]').attr('src');
-                //console.log("btnFichas2= " + btnSrc);
-                if (buttonState == 0) {
-                    $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
-                    buttonState = 1;
-                } else {
-                    $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
-                    buttonState = 0;
-                }
-            });
-            $('#buttonFichas3').click(function() {
-                btnSrc = $('img[alt="btnFichas3"]').attr('src');
-                //console.log("btnFichas3= " + btnSrc);
-                if (buttonState == 0) {
-                    $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
-                    buttonState = 1;
-                } else {
-                    $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
-                    buttonState = 0;
-                }
-            });
-            $('#buttonFichas4').click(function() {
-                btnSrc = $('img[alt="btnFichas4"]').attr('src');
-                //console.log("btnFichas4= " + btnSrc);
-                if (buttonState == 0) {
-                    $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
-                    buttonState = 1;
-                } else {
-                    $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
-                    buttonState = 0;
-                }
-            });
-            $('#buttonFichas5').click(function() {
-                btnSrc = $('img[alt="btnFichas5"]').attr('src');
-                //console.log("btnFichas5= " + btnSrc);
-                if (buttonState == 0) {
-                    $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
-                    $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
-                    buttonState = 1;
-                } else {
-                    $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
-                    $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
-                    buttonState = 0;
-                }
-            });
-        });
-    </script>
 
 </body>
 

@@ -5,7 +5,6 @@ var tablero = [
     [],
     [],
     [],
-    []
 ];
 
 //var fichas = [{player1: 'assets/Ficha1.png'}, {player2: 'assets/Ficha2.png'}];
@@ -32,8 +31,8 @@ timer.start();
 
 $(document).ready(function() {
     //Constructor array tablero
-    for (var i = 0; i < 7; i++) {
-        for (var j = 0; j < 6; j++) {
+    for (var i = 0; i < tablero.length; i++) {
+        for (var j = 0; j < 7; j++) {
             numeroPos = numeroPos + 1
             tablero[i][j] = numeroPos;
             //tablero[i][j] = 0;
@@ -73,6 +72,7 @@ $(document).ready(function() {
             $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
             $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
             $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
+            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
             $('#currentPlayer').text(player2Name);
             buttonState = 1;
             selectedButton = "btn0-player1";
@@ -91,6 +91,7 @@ $(document).ready(function() {
             $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
             $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
             $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
+            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
             $('#currentPlayer').text(player1Name);
             buttonState = 0;
             playerCode = 2;
@@ -113,6 +114,7 @@ $(document).ready(function() {
             $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
             $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
             $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
+            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
             $('#currentPlayer').text(player2Name);
             buttonState = 1;
             selectedButton = "btn1-player1";
@@ -130,6 +132,7 @@ $(document).ready(function() {
             $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
             $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
             $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
+            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
             $('#currentPlayer').text(player1Name);
             buttonState = 0;
             selectedButton = "btn1-player2";
@@ -152,6 +155,7 @@ $(document).ready(function() {
             $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
             $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
             $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
+            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
             $('#currentPlayer').text(player2Name);
             buttonState = 1;
             selectedButton = "btn2-player1";
@@ -169,6 +173,7 @@ $(document).ready(function() {
             $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
             $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
             $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
+            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
             $('#currentPlayer').text(player1Name);
             buttonState = 0;
             selectedButton = "btn2-player2";
@@ -191,6 +196,7 @@ $(document).ready(function() {
             $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
             $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
             $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
+            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
             $('#currentPlayer').text(player2Name);
             buttonState = 1;
             selectedButton = "btn3-player1";
@@ -208,6 +214,7 @@ $(document).ready(function() {
             $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
             $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
             $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
+            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
             $('#currentPlayer').text(player1Name);
             buttonState = 0;
             selectedButton = "btn3-player2";
@@ -230,6 +237,7 @@ $(document).ready(function() {
             $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
             $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
             $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
+            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
             $('#currentPlayer').text(player2Name);
             buttonState = 1;
             selectedButton = "btn4-player1";
@@ -247,6 +255,7 @@ $(document).ready(function() {
             $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
             $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
             $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
+            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
             $('#currentPlayer').text(player1Name);
             buttonState = 0;
             selectedButton = "btn4-player2";
@@ -269,6 +278,7 @@ $(document).ready(function() {
             $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
             $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
             $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
+            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
             $('#currentPlayer').text(player2Name);
             buttonState = 1;
             selectedButton = "btn5-player1";
@@ -286,6 +296,7 @@ $(document).ready(function() {
             $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
             $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
             $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
+            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
             $('#currentPlayer').text(player1Name);
             buttonState = 0;
             selectedButton = "btn5-player2";
@@ -298,6 +309,49 @@ $(document).ready(function() {
             //droopFicha();
         }
     });
+
+ $('#buttonFichas6').click(function() {
+        btnSrc = $('img[alt="btnFichas6"]').attr('src');
+        //console.log("btnFichas6= " + btnSrc);
+        if (buttonState == 0) {
+            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
+            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
+            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
+            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
+            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
+            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
+            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
+            $('#currentPlayer').text(player2Name);
+            buttonState = 1;
+            selectedButton = "btn6-player1";
+            currentColumn = "6";
+            playerActions.playerSelectedButton = selectedButton;
+            //playerActions.playerSelectedColumn = 
+            calculateInterval();
+            console.log(sumaColumna);
+            sumaColumna = 0;
+            //droopFicha();
+        } else {
+            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
+            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
+            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
+            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
+            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
+            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
+            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
+            $('#currentPlayer').text(player1Name);
+            buttonState = 0;
+            selectedButton = "btn6-player2";
+            currentColumn = "6";
+            playerActions.playerSelectedButton = selectedButton;
+            //playerActions.playerSelectedColumn = 
+            calculateInterval();
+            console.log(sumaColumna);
+            sumaColumna = 0;
+            //droopFicha();
+        }
+    });
+
     //Fin constructor
 });
 
@@ -319,13 +373,13 @@ function checkColumna() {
     var i, p;
     var tempColumn = [];
     for (i = 0; i < tablero.length; i++) {
-        for (p = intervaloResultante - 1; p < tablero.length; p++) {
+        for (p = intervaloResultante - 1; p < 7; p++) {
             sumaColumna = sumaColumna + tablero[i][p];
             console.log(tablero[i][p]);
             tempColumn.push(tablero[i][p]);
             i++;
             p--;
-            if (i == 7) {
+            if (i == 6) {
                 largestNumber = Math.max.apply(Math, tempColumn);
                 console.log("LARGEST: " + largestNumber);
                 getIndexOf();
@@ -388,6 +442,11 @@ function calculateInterval() {
         checkColumna();
         return;
     }
+    if (selectedButton == "btn6-player1" || selectedButton == "btn6-player2") {
+        intervaloResultante = 7;
+        checkColumna();
+        return;
+    }
 }
 
 function reloadGameBoard(){
@@ -402,7 +461,7 @@ function reloadGameBoard(){
                 for (var i = 0; i < tablero.length; i++) {
                     contador = 0;
                     var fila = boardBody.insertRow(cont);
-                    for (var j = 0; j < 6; j++) {
+                    for (var j = 0; j < 7; j++) {
                         var cont = boardBody.rows.length;
                         var celda = fila.insertCell(contador);
                         celda.innerHTML = tablero[i][j];

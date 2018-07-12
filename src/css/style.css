@@ -1,3 +1,5 @@
+/*@import url('04B_30.ttf');
+*/
 body {
   overflow: hidden;
   position: absolute;
@@ -79,3 +81,9 @@ body {
     overflow: hidden;
     outline:none;
 }
+/*
+p{
+  font-family: '04B_30.ttf';
+  font-size: 22px;
+}
+*/

@@ -19,7 +19,8 @@ var player1Name, player2Name, currentGameID, currentLocalStorageContent;
 var numeroFila, numeroColumna;
 var numeroPos = 0;
 var selectedButton, selectedColumn, intervaloResultante, largestNumber, foundedIndex, playerCode;
-
+var countButtonPlayer1 = 0;
+var countButtonPlayer2 = 0;
 var currentColumn = 0;
 
 var sumaColumna = 0;
@@ -33,9 +34,9 @@ $(document).ready(function() {
     //Constructor array tablero
     for (var i = 0; i < tablero.length; i++) {
         for (var j = 0; j < 7; j++) {
-            numeroPos = numeroPos + 1
-            tablero[i][j] = numeroPos;
-            //tablero[i][j] = 0;
+            //numeroPos = numeroPos + 1
+            //tablero[i][j] = numeroPos;
+            tablero[i][j] = '';
         }
     }
     //Fin constructor array tablero
@@ -80,6 +81,12 @@ $(document).ready(function() {
             // currentColumn = "0";
             playerActions.playerSelectedButton = selectedButton;
             //playerActions.playerSelectedColumn = 
+            if(countButtonPlayer1 == 3 || countButtonPlayer2 == 3){
+                alert("Culumna llena!");
+            $('#buttonFichas0').prop("disabled",true);
+                return;
+            }
+            countButtonPlayer1 = countButtonPlayer1 + 1;
             calculateInterval();
             console.log(sumaColumna);
             sumaColumna = 0;
@@ -99,6 +106,13 @@ $(document).ready(function() {
             // currentColumn = "0";
             playerActions.playerSelectedButton = selectedButton;
             //playerActions.playerSelectedColumn = 
+            countButtonPlayer2 = countButtonPlayer2 + 1;
+            if(countButtonPlayer1 == 5 && countButtonPlayer2 == 5){
+                alert("Columna llena!");
+                $('#buttonFichas0').prop("disabled",true);
+                return;
+
+            }
             calculateInterval();
             console.log(sumaColumna);
             sumaColumna = 0;
@@ -358,13 +372,10 @@ $(document).ready(function() {
 
 /*
 $(document).ready(function() {
-    tablero[0][0] = 1;
-    tablero[1][0] = 2;
-    tablero[2][0] = 3;
-    tablero[3][0] = 4;
-    tablero[4][0] = 5;
-    tablero[5][0] = 6;
-    tablero[6][0] = 7;
+    tablero[5][0] = "";
+    tablero[4][1] = 1;
+    tablero[3][2] = 1;
+    tablero[2][3] = 1;
 });
 */
 
@@ -414,37 +425,37 @@ function getIndexOf() {
 function calculateInterval() {
     if (selectedButton == "btn0-player1" || selectedButton == "btn0-player2") {
         intervaloResultante = 1;
-        checkColumna();
+        saveficha();
         return;
     }
     if (selectedButton == "btn1-player1" || selectedButton == "btn1-player2") {
         intervaloResultante = 2;
-        checkColumna();
+        saveficha();
         return;
     }
     if (selectedButton == "btn2-player1" || selectedButton == "btn2-player2") {
         intervaloResultante = 3;
-        checkColumna();
+        saveficha();
         return;
     }
     if (selectedButton == "btn3-player1" || selectedButton == "btn3-player2") {
         intervaloResultante = 4;
-        checkColumna();
+        saveficha();
         return;
     }
     if (selectedButton == "btn4-player1" || selectedButton == "btn4-player2") {
         intervaloResultante = 5;
-        checkColumna();
+        saveficha();
         return;
     }
     if (selectedButton == "btn5-player1" || selectedButton == "btn5-player2") {
         intervaloResultante = 6;
-        checkColumna();
+        saveficha();
         return;
     }
     if (selectedButton == "btn6-player1" || selectedButton == "btn6-player2") {
         intervaloResultante = 7;
-        checkColumna();
+        saveficha();
         return;
     }
 }
@@ -469,6 +480,21 @@ function reloadGameBoard(){
                     }
                 }
 }
+
+    function saveficha(){
+        for (var i= tablero.length - 1; i >= 0 ; i--) {
+            for (var j = intervaloResultante - 1; j < 7; j++ ){
+                
+                if (tablero[i][j]== ""){
+                    tablero[i][j]=playerCode;
+                    reloadGameBoard();
+                    return;
+                }
+                i--;
+                j--;
+            }
+        } 
+    }
 
 //Inicializador Timer
 timer.addEventListener('secondsUpdated', function(e) {

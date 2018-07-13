@@ -22,15 +22,27 @@ var selectedButton, selectedColumn, intervaloResultante, largestNumber, foundedI
 var countButtonPlayer1 = 0;
 var countButtonPlayer2 = 0;
 var currentColumn = 0;
-
+var buttonState = 0;
 var sumaColumna = 0;
 var player1Column = [];
 var player2Culumn = [];
 
+/*EXPERIMENTAL*/
+var turno = 0;
+var idButton;
+var clickCantBtn0 = 0;
+var clickCantBtn1 = 0;
+var clickCantBtn2 = 0;
+var clickCantBtn3 = 0;
+var clickCantBtn4 = 0;
+var clickCantBtn5 = 0;
+var clickCantBtn6 = 0;
+/**/
+
 var timer = new Timer();
 timer.start();
 
-$(document).ready(function() {
+$(document).ready(function () {
     //Constructor array tablero
     for (var i = 0; i < tablero.length; i++) {
         for (var j = 0; j < 7; j++) {
@@ -61,308 +73,285 @@ $(document).ready(function() {
 
     //Constructor para el cambio de fichas de jugador
     var btnSrc;
-    var buttonState = 0;
     var currentColumn = 0;
-    $('#buttonFichas0').click(function() {
-        btnSrc = $('img[alt="btnFichas0"]').attr('src');
-        //console.log("btnFichas0= " + btnSrc);
-        if (buttonState == 0) {
-            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
-            $('#currentPlayer').text(player2Name);
+
+    $('#buttonFichas0').click(function () {
+        selectedButton = "btn0-player1";
+        idButton = "btnFichas0";
+        clickCantBtn0++;
+        if (turno == 0) {
             buttonState = 1;
-            selectedButton = "btn0-player1";
             playerCode = 1;
-            // currentColumn = "0";
-            playerActions.playerSelectedButton = selectedButton;
-            //playerActions.playerSelectedColumn = 
-            if(countButtonPlayer1 == 3 || countButtonPlayer2 == 3){
-                alert("Culumna llena!");
-            $('#buttonFichas0').prop("disabled",true);
-                return;
-            }
             countButtonPlayer1 = countButtonPlayer1 + 1;
             calculateInterval();
-            console.log(sumaColumna);
-            sumaColumna = 0;
-            //droopFicha();
-        } else {
-            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
-            $('#currentPlayer').text(player1Name);
+            reloadButtonImage();
+            turno = 1;
+            if (clickCantBtn0 >= 6) {
+                $('img[alt=btnFichas0]').attr('src', 'assets/FichaDisabled.png');
+                // alert("Culumna llena!");
+                buttonState = -1;
+                $('#buttonFichas0').prop("disabled", true);
+                throw new Error("Columna llena!");
+            }
+            return;
+        }
+
+        if (turno == 1) {
+            selectedButton = "btn0-player2";
             buttonState = 0;
             playerCode = 2;
-            selectedButton = "btn0-player2";
-            // currentColumn = "0";
-            playerActions.playerSelectedButton = selectedButton;
-            //playerActions.playerSelectedColumn = 
             countButtonPlayer2 = countButtonPlayer2 + 1;
-            if(countButtonPlayer1 == 5 && countButtonPlayer2 == 5){
-                alert("Columna llena!");
-                $('#buttonFichas0').prop("disabled",true);
-                return;
-
+            calculateInterval();
+            reloadButtonImage();
+            turno = 0;
+            if (clickCantBtn0 >= 6) {
+                $('img[alt=btnFichas0]').attr('src', 'assets/FichaDisabled.png');
+                // alert("Culumna llena!");
+                buttonState = -1;
+                $('#buttonFichas0').prop("disabled", true);
+                throw new Error("Columna llena!");
             }
-            calculateInterval();
-            console.log(sumaColumna);
-            sumaColumna = 0;
-        }
-    });
-    $('#buttonFichas1').click(function() {
-        btnSrc = $('img[alt="btnFichas1"]').attr('src');
-        //console.log("btnFichas1= " + btnSrc);
-        if (buttonState == 0) {
-            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
-            $('#currentPlayer').text(player2Name);
-            buttonState = 1;
-            selectedButton = "btn1-player1";
-            //currentColumn = "1";
-            playerActions.playerSelectedButton = selectedButton;
-            //playerActions.playerSelectedColumn = 
-            calculateInterval();
-            console.log(sumaColumna);
-            sumaColumna = 0;
-            //droopFicha();
-        } else {
-            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
-            $('#currentPlayer').text(player1Name);
-            buttonState = 0;
-            selectedButton = "btn1-player2";
-            // currentColumn = "1";
-            playerActions.playerSelectedButton = selectedButton;
-            //playerActions.playerSelectedColumn = 
-            calculateInterval();
-            console.log(sumaColumna);
-            sumaColumna = 0;
-            //droopFicha();
-        }
-    });
-    $('#buttonFichas2').click(function() {
-        btnSrc = $('img[alt="btnFichas2"]').attr('src');
-        //console.log("btnFichas2= " + btnSrc);
-        if (buttonState == 0) {
-            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
-            $('#currentPlayer').text(player2Name);
-            buttonState = 1;
-            selectedButton = "btn2-player1";
-            currentColumn = "2";
-            playerActions.playerSelectedButton = selectedButton;
-            //playerActions.playerSelectedColumn = 
-            calculateInterval();
-            console.log(sumaColumna);
-            sumaColumna = 0;
-            //droopFicha();
-        } else {
-            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
-            $('#currentPlayer').text(player1Name);
-            buttonState = 0;
-            selectedButton = "btn2-player2";
-            currentColumn = "2";
-            playerActions.playerSelectedButton = selectedButton;
-            //playerActions.playerSelectedColumn = 
-            calculateInterval();
-            console.log(sumaColumna);
-            sumaColumna = 0;
-            //droopFicha();
-        }
-    });
-    $('#buttonFichas3').click(function() {
-        btnSrc = $('img[alt="btnFichas3"]').attr('src');
-        //console.log("btnFichas3= " + btnSrc);
-        if (buttonState == 0) {
-            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
-            $('#currentPlayer').text(player2Name);
-            buttonState = 1;
-            selectedButton = "btn3-player1";
-            currentColumn = "3";
-            playerActions.playerSelectedButton = selectedButton;
-            //playerActions.playerSelectedColumn = 
-            calculateInterval();
-            console.log(sumaColumna);
-            sumaColumna = 0;
-            //droopFicha();
-        } else {
-            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
-            $('#currentPlayer').text(player1Name);
-            buttonState = 0;
-            selectedButton = "btn3-player2";
-            currentColumn = "3";
-            playerActions.playerSelectedButton = selectedButton;
-            //playerActions.playerSelectedColumn = 
-            calculateInterval();
-            console.log(sumaColumna);
-            sumaColumna = 0;
-            //droopFicha();
-        }
-    });
-    $('#buttonFichas4').click(function() {
-        btnSrc = $('img[alt="btnFichas4"]').attr('src');
-        //console.log("btnFichas4= " + btnSrc);
-        if (buttonState == 0) {
-            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
-            $('#currentPlayer').text(player2Name);
-            buttonState = 1;
-            selectedButton = "btn4-player1";
-            currentColumn = "4";
-            playerActions.playerSelectedButton = selectedButton;
-            //playerActions.playerSelectedColumn = 
-            calculateInterval();
-            console.log(sumaColumna);
-            sumaColumna = 0;
-            //droopFicha();
-        } else {
-            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
-            $('#currentPlayer').text(player1Name);
-            buttonState = 0;
-            selectedButton = "btn4-player2";
-            currentColumn = "4";
-            playerActions.playerSelectedButton = selectedButton;
-            //playerActions.playerSelectedColumn = 
-            calculateInterval();
-            console.log(sumaColumna);
-            sumaColumna = 0;
-            //droopFicha();
-        }
-    });
-    $('#buttonFichas5').click(function() {
-        btnSrc = $('img[alt="btnFichas5"]').attr('src');
-        //console.log("btnFichas5= " + btnSrc);
-        if (buttonState == 0) {
-            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
-            $('#currentPlayer').text(player2Name);
-            buttonState = 1;
-            selectedButton = "btn5-player1";
-            currentColumn = "5";
-            playerActions.playerSelectedButton = selectedButton;
-            //playerActions.playerSelectedColumn = 
-            calculateInterval();
-            console.log(sumaColumna);
-            sumaColumna = 0;
-            //droopFicha();
-        } else {
-            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
-            $('#currentPlayer').text(player1Name);
-            buttonState = 0;
-            selectedButton = "btn5-player2";
-            currentColumn = "5";
-            playerActions.playerSelectedButton = selectedButton;
-            //playerActions.playerSelectedColumn = 
-            calculateInterval();
-            console.log(sumaColumna);
-            sumaColumna = 0;
-            //droopFicha();
+            return;
         }
     });
 
- $('#buttonFichas6').click(function() {
-        btnSrc = $('img[alt="btnFichas6"]').attr('src');
-        //console.log("btnFichas6= " + btnSrc);
-        if (buttonState == 0) {
-            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
-            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
-            $('#currentPlayer').text(player2Name);
+    $('#buttonFichas1').click(function () {
+        selectedButton = "btn1-player1";
+        idButton = "btnFichas1";
+        clickCantBtn1++;
+        if (turno == 0) {
             buttonState = 1;
-            selectedButton = "btn6-player1";
-            currentColumn = "6";
-            playerActions.playerSelectedButton = selectedButton;
-            //playerActions.playerSelectedColumn = 
+            playerCode = 1;
+            countButtonPlayer1 = countButtonPlayer1 + 1;
             calculateInterval();
-            console.log(sumaColumna);
-            sumaColumna = 0;
-            //droopFicha();
-        } else {
-            $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
-            $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
-            $('#currentPlayer').text(player1Name);
+            reloadButtonImage();
+            turno = 1;
+            if (clickCantBtn1 >= 6) {
+                $('img[alt=btnFichas1]').attr('src', 'assets/FichaDisabled.png');
+                // alert("Culumna llena!");
+                buttonState = -1;
+                $('#buttonFichas1').prop("disabled", true);
+                throw new Error("Columna llena!");
+            }
+            return;
+        }
+
+        if (turno == 1) {
+            selectedButton = "btn1-player2";
             buttonState = 0;
-            selectedButton = "btn6-player2";
-            currentColumn = "6";
-            playerActions.playerSelectedButton = selectedButton;
-            //playerActions.playerSelectedColumn = 
+            playerCode = 2;
+            countButtonPlayer2 = countButtonPlayer2 + 1;
             calculateInterval();
-            console.log(sumaColumna);
-            sumaColumna = 0;
-            //droopFicha();
+            reloadButtonImage();
+            turno = 0;
+            if (clickCantBtn1 >= 6) {
+                $('img[alt=btnFichas1]').attr('src', 'assets/FichaDisabled.png');
+                // alert("Culumna llena!");
+                buttonState = -1;
+                $('#buttonFichas1').prop("disabled", true);
+                throw new Error("Columna llena!");
+            }
+            return;
+        }
+    });
+
+    $('#buttonFichas2').click(function () {
+        selectedButton = "btn2-player1";
+        idButton = "btnFichas2";
+        clickCantBtn2++;
+        if (turno == 0) {
+            buttonState = 1;
+            playerCode = 1;
+            countButtonPlayer1 = countButtonPlayer1 + 1;
+            calculateInterval();
+            reloadButtonImage();
+            turno = 1;
+            if (clickCantBtn2 >= 6) {
+                $('img[alt=btnFichas2]').attr('src', 'assets/FichaDisabled.png');
+                // alert("Culumna llena!");
+                buttonState = -1;
+                $('#buttonFichas2').prop("disabled", true);
+                throw new Error("Columna llena!");
+            }
+            return;
+        }
+
+        if (turno == 1) {
+            selectedButton = "btn2-player2";
+            buttonState = 0;
+            playerCode = 2;
+            countButtonPlayer2 = countButtonPlayer2 + 1;
+            calculateInterval();
+            reloadButtonImage();
+            turno = 0;
+            if (clickCantBtn1 >= 6) {
+                $('img[alt=btnFichas2]').attr('src', 'assets/FichaDisabled.png');
+                // alert("Culumna llena!");
+                buttonState = -1;
+                $('#buttonFichas2').prop("disabled", true);
+                throw new Error("Columna llena!");
+            }
+            return;
+        }
+    });
+
+    $('#buttonFichas3').click(function () {
+        selectedButton = "btn3-player1";
+        idButton = "btnFichas3";
+        clickCantBtn3++;
+        if (turno == 0) {
+            buttonState = 1;
+            playerCode = 1;
+            countButtonPlayer1 = countButtonPlayer1 + 1;
+            calculateInterval();
+            reloadButtonImage();
+            turno = 1;
+            if (clickCantBtn3 >= 6) {
+                $('img[alt=btnFichas3]').attr('src', 'assets/FichaDisabled.png');
+                // alert("Culumna llena!");
+                buttonState = -1;
+                $('#buttonFichas3').prop("disabled", true);
+                throw new Error("Columna llena!");
+            }
+            return;
+        }
+
+        if (turno == 1) {
+            selectedButton = "btn3-player2";
+            buttonState = 0;
+            playerCode = 2;
+            countButtonPlayer2 = countButtonPlayer2 + 1;
+            calculateInterval();
+            reloadButtonImage();
+            turno = 0;
+            if (clickCantBtn3 >= 6) {
+                $('img[alt=btnFichas3]').attr('src', 'assets/FichaDisabled.png');
+                // alert("Culumna llena!");
+                buttonState = -1;
+                $('#buttonFichas3').prop("disabled", true);
+                throw new Error("Columna llena!");
+            }
+            return;
+        }
+    });
+
+    $('#buttonFichas4').click(function () {
+        selectedButton = "btn4-player1";
+        idButton = "btnFichas4";
+        clickCantBtn4++;
+        if (turno == 0) {
+            buttonState = 1;
+            playerCode = 1;
+            countButtonPlayer1 = countButtonPlayer1 + 1;
+            calculateInterval();
+            reloadButtonImage();
+            turno = 1;
+            if (clickCantBtn4 >= 6) {
+                $('img[alt=btnFichas4]').attr('src', 'assets/FichaDisabled.png');
+                // alert("Culumna llena!");
+                buttonState = -1;
+                $('#buttonFichas4').prop("disabled", true);
+                throw new Error("Columna llena!");
+            }
+            return;
+        }
+
+        if (turno == 1) {
+            selectedButton = "btn4-player2";
+            buttonState = 0;
+            playerCode = 2;
+            countButtonPlayer2 = countButtonPlayer2 + 1;
+            calculateInterval();
+            reloadButtonImage();
+            turno = 0;
+            if (clickCantBtn4 >= 6) {
+                $('img[alt=btnFichas4]').attr('src', 'assets/FichaDisabled.png');
+                // alert("Culumna llena!");
+                buttonState = -1;
+                $('#buttonFichas4').prop("disabled", true);
+                throw new Error("Columna llena!");
+            }
+            return;
+        }
+    });
+
+    $('#buttonFichas5').click(function () {
+        selectedButton = "btn5-player1";
+        idButton = "btnFichas5";
+        clickCantBtn5++;
+        if (turno == 0) {
+            buttonState = 1;
+            playerCode = 1;
+            countButtonPlayer1 = countButtonPlayer1 + 1;
+            calculateInterval();
+            reloadButtonImage();
+            turno = 1;
+            if (clickCantBtn5 >= 6) {
+                $('img[alt=btnFichas5]').attr('src', 'assets/FichaDisabled.png');
+                // alert("Culumna llena!");
+                buttonState = -1;
+                $('#buttonFichas5').prop("disabled", true);
+                throw new Error("Columna llena!");
+            }
+            return;
+        }
+
+        if (turno == 1) {
+            selectedButton = "btn5-player2";
+            buttonState = 0;
+            playerCode = 2;
+            countButtonPlayer2 = countButtonPlayer2 + 1;
+            calculateInterval();
+            reloadButtonImage();
+            turno = 0;
+            if (clickCantBtn5 >= 6) {
+                $('img[alt=btnFichas5]').attr('src', 'assets/FichaDisabled.png');
+                // alert("Culumna llena!");
+                buttonState = -1;
+                $('#buttonFichas5').prop("disabled", true);
+                throw new Error("Columna llena!");
+            }
+            return;
+        }
+    });
+
+    $('#buttonFichas6').click(function () {
+        selectedButton = "btn6-player1";
+        idButton = "btnFichas6";
+        clickCantBtn6++;
+        if (turno == 0) {
+            buttonState = 1;
+            playerCode = 1;
+            countButtonPlayer1 = countButtonPlayer1 + 1;
+            calculateInterval();
+            reloadButtonImage();
+            turno = 1;
+            if (clickCantBtn6 >= 6) {
+                $('img[alt=btnFichas6]').attr('src', 'assets/FichaDisabled.png');
+                // alert("Culumna llena!");
+                buttonState = -1;
+                $('#buttonFichas6').prop("disabled", true);
+                throw new Error("Columna llena!");
+            }
+            return;
+        }
+
+        if (turno == 1) {
+            selectedButton = "btn6-player2";
+            buttonState = 0;
+            playerCode = 2;
+            countButtonPlayer2 = countButtonPlayer2 + 1;
+            calculateInterval();
+            reloadButtonImage();
+            turno = 0;
+            if (clickCantBtn6 >= 6) {
+                $('img[alt=btnFichas6]').attr('src', 'assets/FichaDisabled.png');
+                // alert("Culumna llena!");
+                buttonState = -1;
+                $('#buttonFichas6').prop("disabled", true);
+                throw new Error("Columna llena!");
+            }
+            return;
         }
     });
 
@@ -460,43 +449,73 @@ function calculateInterval() {
     }
 }
 
-function reloadGameBoard(){
+function reloadGameBoard() {
     var tabla = document.getElementById("boardBody");
-                var cont = tabla.rows.length;
-                for (var i = cont - 1; i > -1; i--) {
-                    tabla.deleteRow(i);
-                }
-                var boardBody = document.getElementById("boardBody");
-                var contador = 0;
-                cont = 0;
-                for (var i = 0; i < tablero.length; i++) {
-                    contador = 0;
-                    var fila = boardBody.insertRow(cont);
-                    for (var j = 0; j < 7; j++) {
-                        var cont = boardBody.rows.length;
-                        var celda = fila.insertCell(contador);
-                        celda.innerHTML = tablero[i][j];
-                        contador++;
-                    }
-                }
+    var cont = tabla.rows.length;
+    for (var i = cont - 1; i > -1; i--) {
+        tabla.deleteRow(i);
+    }
+    var boardBody = document.getElementById("boardBody");
+    var contador = 0;
+    cont = 0;
+    for (var i = 0; i < tablero.length; i++) {
+        contador = 0;
+        var fila = boardBody.insertRow(cont);
+        for (var j = 0; j < 7; j++) {
+            var cont = boardBody.rows.length;
+            var celda = fila.insertCell(contador);
+            celda.innerHTML = tablero[i][j];
+            contador++;
+        }
+    }
 }
 
-    function saveficha(){
-        for (var i= tablero.length - 1; i >= 0 ; i--) {
-            for (var j = intervaloResultante - 1; j < 7; j++ ){
-                
-                if (tablero[i][j]== ""){
-                    tablero[i][j]=playerCode;
-                    reloadGameBoard();
-                    return;
-                }
-                i--;
-                j--;
-            }
-        } 
+function reloadButtonImage() {
+    if (buttonState == 1) {
+        $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
+        $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
+        $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
+        $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
+        $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
+        $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
+        $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
+        $('#currentPlayer').text(player2Name);
     }
 
+    if (buttonState == 0) {
+        $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
+        $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
+        $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
+        $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
+        $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
+        $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
+        $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
+        $('#currentPlayer').text(player1Name);
+    }
+    if (buttonState == -1) {
+
+
+        $('#currentPlayer').text(player2Name);
+    }
+
+}
+
+function saveficha() {
+    for (var i = tablero.length - 1; i >= 0; i--) {
+        for (var j = intervaloResultante - 1; j < 7; j++) {
+
+            if (tablero[i][j] == "") {
+                tablero[i][j] = playerCode;
+                reloadGameBoard();
+                return;
+            }
+            i--;
+            j--;
+        }
+    }
+}
+
 //Inicializador Timer
-timer.addEventListener('secondsUpdated', function(e) {
+timer.addEventListener('secondsUpdated', function (e) {
     $('#currentTime').html(timer.getTimeValues().toString());
 });

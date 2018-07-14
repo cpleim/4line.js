@@ -37,10 +37,6 @@ var clickCantBtn3 = 0;
 var clickCantBtn4 = 0;
 var clickCantBtn5 = 0;
 var clickCantBtn6 = 0;
-
-var tableroMap;
-var pathFinder;
-var foundedPath;
 /**/
 
 var timer = new Timer();
@@ -500,17 +496,6 @@ function reloadGameBoard() {
             contador++;
         }
     }
-    startPathFinding();
-}
-
-function startPathFinding() {
-    //tableroMap = new PF.Grid(7,6);
-    tableroMap = new PF.Grid(7, 6);
-    pathFinder = new PF.AStarFinder({
-        allowDiagonal: true,
-        dontCrossCorners: true
-    });
-    foundedPath = pathFinder.findPath(1, 2, 4, 2, tableroMap);
 }
 
 function reloadButtonImage() {

@@ -37,6 +37,10 @@ var clickCantBtn3 = 0;
 var clickCantBtn4 = 0;
 var clickCantBtn5 = 0;
 var clickCantBtn6 = 0;
+
+var tableroMap;
+var pathFinder;
+var foundedPath;
 /**/
 
 var timer = new Timer();
@@ -415,36 +419,64 @@ function calculateInterval() {
     if (selectedButton == "btn0-player1" || selectedButton == "btn0-player2") {
         intervaloResultante = 1;
         saveficha();
+        evaluacolumns();
+        evaluaFilas();
+        diagonalIzq();
+        diagonalDer();
         return;
     }
     if (selectedButton == "btn1-player1" || selectedButton == "btn1-player2") {
         intervaloResultante = 2;
         saveficha();
+        evaluacolumns();
+        evaluaFilas();
+        diagonalIzq();
+        diagonalDer();
         return;
     }
     if (selectedButton == "btn2-player1" || selectedButton == "btn2-player2") {
         intervaloResultante = 3;
         saveficha();
+        evaluacolumns();
+        evaluaFilas();
+        diagonalIzq();
+        diagonalDer();
         return;
     }
     if (selectedButton == "btn3-player1" || selectedButton == "btn3-player2") {
         intervaloResultante = 4;
         saveficha();
+        evaluacolumns();
+        evaluaFilas();
+        diagonalIzq();
+        diagonalDer();
         return;
     }
     if (selectedButton == "btn4-player1" || selectedButton == "btn4-player2") {
         intervaloResultante = 5;
         saveficha();
+        evaluacolumns();
+        evaluaFilas();
+        diagonalIzq();
+        diagonalDer();
         return;
     }
     if (selectedButton == "btn5-player1" || selectedButton == "btn5-player2") {
         intervaloResultante = 6;
         saveficha();
+        evaluacolumns();
+        evaluaFilas();
+        diagonalIzq();
+        diagonalDer();
         return;
     }
     if (selectedButton == "btn6-player1" || selectedButton == "btn6-player2") {
         intervaloResultante = 7;
         saveficha();
+        evaluacolumns();
+        evaluaFilas();
+        diagonalIzq();
+        diagonalDer();
         return;
     }
 }
@@ -468,6 +500,17 @@ function reloadGameBoard() {
             contador++;
         }
     }
+    startPathFinding();
+}
+
+function startPathFinding() {
+    //tableroMap = new PF.Grid(7,6);
+    tableroMap = new PF.Grid(7, 6);
+    pathFinder = new PF.AStarFinder({
+        allowDiagonal: true,
+        dontCrossCorners: true
+    });
+    foundedPath = pathFinder.findPath(1, 2, 4, 2, tableroMap);
 }
 
 function reloadButtonImage() {
@@ -513,6 +556,106 @@ function saveficha() {
             j--;
         }
     }
+}
+
+
+
+function evaluacolumns() {
+    var contador, contador2;
+
+    for (var i = 0; i <= 6; i++) {
+        contador = 0;
+        contador2 = 0;
+
+        for (var j = tablero.length - 1; j >= 0; j--) {
+            if (tablero[j][i] == 1) {
+                contador++;
+            } else {
+                contador = 0;
+            }
+            if (contador == 4) {
+                alert("Jugador 1 ha ganado [COLUMN]");
+                return;
+            }
+            if (tablero[j][i] == 2) {
+                contador2 = contador2 + 2;
+            } else {
+                contador2 = 0;
+            }
+            if (contador2 == 8) {
+                alert("Jugador 2 ha ganado [COLUMN]");
+                return;
+            }
+        }
+    }
+}
+
+function evaluaFilas() {
+    var contador = 0;
+    var contador2 = 0;
+
+    for (var i = 5; i >= 0; i--) {
+        for (var j = 0; j <= 6; j++) {
+            //tablero[i][j] = 8;
+
+            if (tablero[i][j] == 1) {
+                contador++;
+                console.log("[CONTADOR:]" + contador);
+            } else {
+                contador = 0;
+            }
+            if (contador == 4) {
+                alert("Jugador 1 ha ganado [FILA]");
+                return;
+            }
+            if (tablero[i][j] == 2) {
+                contador2 = contador2 + 2;
+                console.log("[CONTADOR2:]" + contador2);
+            } else {
+                contador2 = 0;
+            }
+            if (contador2 == 8) {
+                alert("Jugador 2 ha ganado [FILA]");
+                return;
+            }
+        }
+    }
+}
+
+function diagonalIzq() {
+    for (var i = 5; i >= 3; i--) {
+        for (var j = 0; j <= 3; j++) {
+            //tablero[i][j] = 8;
+            if (tablero[i][j] == 1 && tablero[i - 1][j + 1] == 1 && tablero[i - 2][j + 2] == 1 && tablero[i - 3][j + 3] == 1) {
+                alert("Jugador 1 ha ganado [DIAGIZQ]");
+                return;
+            }
+            if (tablero[i][j] == 2 && tablero[i - 1][j + 1] == 2 && tablero[i - 2][j + 2] == 2 && tablero[i - 3][j + 3] == 2) {
+                alert("Jugador 2 ha ganado [DIAGIZQ]");
+                return;
+            }
+        }
+
+    }
+    return;
+}
+
+function diagonalDer() {
+    for (var i = 5; i >= 3; i--) {
+        for (var j = 3; j <= 6; j++) {
+            //tablero[i][j] = 8;
+            if (tablero[i][j] == 1 && tablero[i - 1][j - 1] == 1 && tablero[i - 2][j - 2] == 1 && tablero[i - 3][j - 3] == 1) {
+                alert("Jugador 1 ha ganado [DIAGDER]");
+                return;
+            }
+            if (tablero[i][j] == 2 && tablero[i - 1][j - 1] == 2 && tablero[i - 2][j - 2] == 2 && tablero[i - 3][j - 3] == 2) {
+                alert("Jugador 2 ha ganado [DIAGDER]");
+                return;
+            }
+        }
+
+    }
+    return;
 }
 
 //Inicializador Timer

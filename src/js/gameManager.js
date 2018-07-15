@@ -7,12 +7,12 @@ var tablero = [
     [],
 ];
 
-//var fichas = [{player1: 'assets/Ficha1.png'}, {player2: 'assets/Ficha2.png'}];
-
-var playerActions = [{
-    playerSelectedButton: selectedButton
+var playerButtons = [{
+    player1IMG: 'assets/Ficha1.png',
+    player1Val: 1
 }, {
-    playerSelectedColumn: selectedColumn
+    player2IMG: 'assets/Ficha2.png',
+    player2Val: 2
 }];
 
 var player1Name, player2Name, currentGameID, currentLocalStorageContent;
@@ -40,9 +40,14 @@ var clickCantBtn6 = 0;
 /**/
 
 var timer = new Timer();
-timer.start();
+timer.start({
+    countdown: true,
+    startValues: {
+        seconds: 16
+    }
+});
 
-$(document).ready(function () {
+$(document).ready(function() {
     //Constructor array tablero
     for (var i = 0; i < tablero.length; i++) {
         for (var j = 0; j < 7; j++) {
@@ -75,14 +80,16 @@ $(document).ready(function () {
     var btnSrc;
     var currentColumn = 0;
 
-    $('#buttonFichas0').click(function () {
+    $('#buttonFichas0').click(function() {
         selectedButton = "btn0-player1";
         idButton = "btnFichas0";
         clickCantBtn0++;
+        timer.reset();
         if (turno == 0) {
             buttonState = 1;
             playerCode = 1;
             countButtonPlayer1 = countButtonPlayer1 + 1;
+            timer.reset();
             calculateInterval();
             reloadButtonImage();
             turno = 1;
@@ -101,6 +108,7 @@ $(document).ready(function () {
             buttonState = 0;
             playerCode = 2;
             countButtonPlayer2 = countButtonPlayer2 + 1;
+            timer.reset();
             calculateInterval();
             reloadButtonImage();
             turno = 0;
@@ -115,14 +123,16 @@ $(document).ready(function () {
         }
     });
 
-    $('#buttonFichas1').click(function () {
+    $('#buttonFichas1').click(function() {
         selectedButton = "btn1-player1";
         idButton = "btnFichas1";
         clickCantBtn1++;
+        timer.reset();
         if (turno == 0) {
             buttonState = 1;
             playerCode = 1;
             countButtonPlayer1 = countButtonPlayer1 + 1;
+            timer.reset();
             calculateInterval();
             reloadButtonImage();
             turno = 1;
@@ -141,6 +151,7 @@ $(document).ready(function () {
             buttonState = 0;
             playerCode = 2;
             countButtonPlayer2 = countButtonPlayer2 + 1;
+            timer.reset();
             calculateInterval();
             reloadButtonImage();
             turno = 0;
@@ -155,14 +166,16 @@ $(document).ready(function () {
         }
     });
 
-    $('#buttonFichas2').click(function () {
+    $('#buttonFichas2').click(function() {
         selectedButton = "btn2-player1";
         idButton = "btnFichas2";
         clickCantBtn2++;
+        timer.reset();
         if (turno == 0) {
             buttonState = 1;
             playerCode = 1;
             countButtonPlayer1 = countButtonPlayer1 + 1;
+            timer.reset();
             calculateInterval();
             reloadButtonImage();
             turno = 1;
@@ -181,6 +194,7 @@ $(document).ready(function () {
             buttonState = 0;
             playerCode = 2;
             countButtonPlayer2 = countButtonPlayer2 + 1;
+            timer.reset();
             calculateInterval();
             reloadButtonImage();
             turno = 0;
@@ -195,14 +209,16 @@ $(document).ready(function () {
         }
     });
 
-    $('#buttonFichas3').click(function () {
+    $('#buttonFichas3').click(function() {
         selectedButton = "btn3-player1";
         idButton = "btnFichas3";
         clickCantBtn3++;
+        timer.reset();
         if (turno == 0) {
             buttonState = 1;
             playerCode = 1;
             countButtonPlayer1 = countButtonPlayer1 + 1;
+            timer.reset();
             calculateInterval();
             reloadButtonImage();
             turno = 1;
@@ -221,6 +237,7 @@ $(document).ready(function () {
             buttonState = 0;
             playerCode = 2;
             countButtonPlayer2 = countButtonPlayer2 + 1;
+            timer.reset();
             calculateInterval();
             reloadButtonImage();
             turno = 0;
@@ -235,14 +252,16 @@ $(document).ready(function () {
         }
     });
 
-    $('#buttonFichas4').click(function () {
+    $('#buttonFichas4').click(function() {
         selectedButton = "btn4-player1";
         idButton = "btnFichas4";
         clickCantBtn4++;
+        timer.reset();
         if (turno == 0) {
             buttonState = 1;
             playerCode = 1;
             countButtonPlayer1 = countButtonPlayer1 + 1;
+            timer.reset();
             calculateInterval();
             reloadButtonImage();
             turno = 1;
@@ -261,6 +280,7 @@ $(document).ready(function () {
             buttonState = 0;
             playerCode = 2;
             countButtonPlayer2 = countButtonPlayer2 + 1;
+            timer.reset();
             calculateInterval();
             reloadButtonImage();
             turno = 0;
@@ -275,14 +295,16 @@ $(document).ready(function () {
         }
     });
 
-    $('#buttonFichas5').click(function () {
+    $('#buttonFichas5').click(function() {
         selectedButton = "btn5-player1";
         idButton = "btnFichas5";
         clickCantBtn5++;
+        timer.reset();
         if (turno == 0) {
             buttonState = 1;
             playerCode = 1;
             countButtonPlayer1 = countButtonPlayer1 + 1;
+            timer.reset();
             calculateInterval();
             reloadButtonImage();
             turno = 1;
@@ -301,6 +323,7 @@ $(document).ready(function () {
             buttonState = 0;
             playerCode = 2;
             countButtonPlayer2 = countButtonPlayer2 + 1;
+            timer.reset();
             calculateInterval();
             reloadButtonImage();
             turno = 0;
@@ -315,14 +338,16 @@ $(document).ready(function () {
         }
     });
 
-    $('#buttonFichas6').click(function () {
+    $('#buttonFichas6').click(function() {
         selectedButton = "btn6-player1";
         idButton = "btnFichas6";
         clickCantBtn6++;
+        timer.reset();
         if (turno == 0) {
             buttonState = 1;
             playerCode = 1;
             countButtonPlayer1 = countButtonPlayer1 + 1;
+            timer.reset();
             calculateInterval();
             reloadButtonImage();
             turno = 1;
@@ -341,6 +366,7 @@ $(document).ready(function () {
             buttonState = 0;
             playerCode = 2;
             countButtonPlayer2 = countButtonPlayer2 + 1;
+            timer.reset();
             calculateInterval();
             reloadButtonImage();
             turno = 0;
@@ -358,6 +384,9 @@ $(document).ready(function () {
     //Fin constructor
 });
 
+function overWriteGameBoard() {
+    currentLocalStorageContent[0].currentGameSession.setupData.currentGameBoard = tablero;
+}
 
 /*
 $(document).ready(function() {
@@ -368,6 +397,16 @@ $(document).ready(function() {
 });
 */
 
+function playerTimeOut() {
+    // $("a").trigger("click");
+    //  var turnoTemp = turno + 1;
+    var num = Math.floor(Math.random() * 7) + 0;
+    console.log("[TIMEOUT]" + num);
+    //buttonFichas4
+    var btnStr = "buttonFichas" + num;
+    console.log(btnStr);
+    document.getElementById(btnStr).click();
+}
 
 function checkColumna() {
     var i, p;
@@ -419,6 +458,7 @@ function calculateInterval() {
         evaluaFilas();
         diagonalIzq();
         diagonalDer();
+        overWriteGameBoard();
         return;
     }
     if (selectedButton == "btn1-player1" || selectedButton == "btn1-player2") {
@@ -428,6 +468,7 @@ function calculateInterval() {
         evaluaFilas();
         diagonalIzq();
         diagonalDer();
+        overWriteGameBoard();
         return;
     }
     if (selectedButton == "btn2-player1" || selectedButton == "btn2-player2") {
@@ -437,6 +478,7 @@ function calculateInterval() {
         evaluaFilas();
         diagonalIzq();
         diagonalDer();
+        overWriteGameBoard();
         return;
     }
     if (selectedButton == "btn3-player1" || selectedButton == "btn3-player2") {
@@ -446,6 +488,7 @@ function calculateInterval() {
         evaluaFilas();
         diagonalIzq();
         diagonalDer();
+        overWriteGameBoard();
         return;
     }
     if (selectedButton == "btn4-player1" || selectedButton == "btn4-player2") {
@@ -455,6 +498,7 @@ function calculateInterval() {
         evaluaFilas();
         diagonalIzq();
         diagonalDer();
+        overWriteGameBoard();
         return;
     }
     if (selectedButton == "btn5-player1" || selectedButton == "btn5-player2") {
@@ -464,6 +508,7 @@ function calculateInterval() {
         evaluaFilas();
         diagonalIzq();
         diagonalDer();
+        overWriteGameBoard();
         return;
     }
     if (selectedButton == "btn6-player1" || selectedButton == "btn6-player2") {
@@ -473,6 +518,7 @@ function calculateInterval() {
         evaluaFilas();
         diagonalIzq();
         diagonalDer();
+        overWriteGameBoard();
         return;
     }
 }
@@ -521,8 +567,6 @@ function reloadButtonImage() {
         $('#currentPlayer').text(player1Name);
     }
     if (buttonState == -1) {
-
-
         $('#currentPlayer').text(player2Name);
     }
 
@@ -559,7 +603,7 @@ function evaluacolumns() {
                 contador = 0;
             }
             if (contador == 4) {
-                alert("Jugador 1 ha ganado [COLUMN]");
+                alert("Jugador 1 ha ganado [COLUMNA]");
                 return;
             }
             if (tablero[j][i] == 2) {
@@ -568,7 +612,7 @@ function evaluacolumns() {
                 contador2 = 0;
             }
             if (contador2 == 8) {
-                alert("Jugador 2 ha ganado [COLUMN]");
+                alert("Jugador 2 ha ganado [COLUMNA]");
                 return;
             }
         }
@@ -581,11 +625,8 @@ function evaluaFilas() {
 
     for (var i = 5; i >= 0; i--) {
         for (var j = 0; j <= 6; j++) {
-            //tablero[i][j] = 8;
-
             if (tablero[i][j] == 1) {
                 contador++;
-                console.log("[CONTADOR:]" + contador);
             } else {
                 contador = 0;
             }
@@ -595,7 +636,6 @@ function evaluaFilas() {
             }
             if (tablero[i][j] == 2) {
                 contador2 = contador2 + 2;
-                console.log("[CONTADOR2:]" + contador2);
             } else {
                 contador2 = 0;
             }
@@ -610,7 +650,6 @@ function evaluaFilas() {
 function diagonalIzq() {
     for (var i = 5; i >= 3; i--) {
         for (var j = 0; j <= 3; j++) {
-            //tablero[i][j] = 8;
             if (tablero[i][j] == 1 && tablero[i - 1][j + 1] == 1 && tablero[i - 2][j + 2] == 1 && tablero[i - 3][j + 3] == 1) {
                 alert("Jugador 1 ha ganado [DIAGIZQ]");
                 return;
@@ -628,7 +667,6 @@ function diagonalIzq() {
 function diagonalDer() {
     for (var i = 5; i >= 3; i--) {
         for (var j = 3; j <= 6; j++) {
-            //tablero[i][j] = 8;
             if (tablero[i][j] == 1 && tablero[i - 1][j - 1] == 1 && tablero[i - 2][j - 2] == 1 && tablero[i - 3][j - 3] == 1) {
                 alert("Jugador 1 ha ganado [DIAGDER]");
                 return;
@@ -638,12 +676,17 @@ function diagonalDer() {
                 return;
             }
         }
-
     }
     return;
 }
 
 //Inicializador Timer
-timer.addEventListener('secondsUpdated', function (e) {
-    $('#currentTime').html(timer.getTimeValues().toString());
+$('#currentTime .values').html(timer.getTimeValues().toString());
+timer.addEventListener('secondsUpdated', function(e) {
+    $('#currentTime .values').html(timer.getTimeValues().toString(['seconds']));
+});
+timer.addEventListener('targetAchieved', function(e) {
+    $('#currentTime .values').html('TIEMPO FUERA!');
+    playerTimeOut();
+    timer.reset();
 });

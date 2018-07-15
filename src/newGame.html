@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>4Line - Nueva Partida</title>
     <link rel="shortcut icon" href="assets/4LineBanner.gif" />
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script><!--jQuery-->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <!--jQuery-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel='stylesheet prefetch' href='css/ewxggx.css'>
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript">
+        var tablero = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+        ];
+        var storedNames;
         var gamesSessions = [];
         var inUseGameIDs = [];
         var player1Name, player2Name, gameCode, generatedGameID;
@@ -23,17 +34,19 @@
                         gameID: Math.random().toString(36).slice(2),
                         setupData: {
                             player1Name: $("#jugador1").val(),
-                            player2Name: $("#jugador2").val()
+                            player2Name: $("#jugador2").val(),
+                            currentGameBoard: tablero
                         }
                     }
                 });
                 generatedGameID = gamesSessions[0].currentGameSession.gameID;
                 inUseGameIDs.push(generatedGameID);
-                sessionStorage.setItem("4line_current_session_ID",generatedGameID);
-                localStorage.setItem("4line_games_sessions_ID:" + generatedGameID, JSON.stringify(gamesSessions));
+                sessionStorage.setItem("4line_current_session_ID", generatedGameID);
+                localStorage.setItem("4line_games_sessions_ID:" + generatedGameID + gamesSessions);
                 console.log("[4Line]--> STORED IN LOCALSTORAGE!");
-                var gameURL = "currentGame.html";
-  				document.location.href = gameURL;
+                //var gameURL = "currentGame.html";
+                //document.location.href = gameURL;
+                
                 //Para traer las sesiones de juego desde el local storage
                 //var storedSessions = JSON.parse(localStorage.getItem("4line_games_sessions_ID:"+id del juego));
             });
@@ -42,21 +55,28 @@
 
         $(document).ready(function() {
             $("#resumeGame").click(function() {
-                gameCode = $("#resumeGameID").val();
-                if ($("#resumeGameID").val() == "") {
-                    alert("Ingresa el código de juego para continuar!");
+                gameIDKey = $("#resumeGameID").val();
+                storedGames = JSON.parse(localStorage.getItem("4line_games_sessions_ID:" + gameIDKey));
+                if(localStorage.length == 0){
+                    alert("Aún no hay ningún dato almacenado en el localStorage :(");
                     return;
                 }
-                for (var i = 0; i < gamesSessions.length; i++) {
-                    if (gameCode == gamesSessions[i].currentGameSession.gameID) {
-                        alert("Found it!");
-                        console.log("GAME ID: " + gamesSessions[i].currentGameSession.gameID);
-                        console.log("PLAYER 1 NAME: " + gamesSessions[i].currentGameSession.setupData.player1Name);
-                        console.log("PLAYER 2 NAME: " + gamesSessions[i].currentGameSession.setupData.player2Name);
-                        return;
-                    }
+                if (storedGames == null) {
+                    alert("gameID no encontrado!");
+                } else {
+                    alert("encontrado!");
+                    console.log(storedGames);
                 }
             });
+        });
+
+        $(document).ready(function(){
+var names = [];
+names[0] = prompt("New member name?");
+localStorage.setItem("names", JSON.stringify(names));
+
+//...
+ storedNames = JSON.parse(localStorage.getItem("names"));
         });
     </script>
 </head>

@@ -22,14 +22,19 @@
         <script src="js/bgGenerator.js"></script>
         -->
     <script>
-        $(document).ready(function () {
-            $('#refrescarTabla').click(function () {
+        $(document).ready(function() {
+            $('#refrescarTabla').click(function() {
                 //diagonalIzq();
                 reloadGameBoard();
             });
         });
-        $(document).ready(function () {
+        $(document).ready(function() {
             reloadGameBoard();
+
+            //var firstRow = document.getElementById("boardBody").rows[0];
+            //var x = firstRow.insertCell(0);
+           // x.innerHTML = "<img src='"+playerButtons[0].player1IMG+"' id=1/>";
+
         });
     </script>
     <div id='contenedor_banner' align="center">
@@ -45,7 +50,9 @@
         <p id="currentPlayer"></p>
         <br>------------------------</br>
         <p>Tiempo transcurrido</p>
-        <div id=currentTime>00:00:00</div>
+        <div id=currentTime>
+            <div class="values"></div>
+        </div>
         <br>------------------------</br>
         <p>Identificador de partida</p>
         <p id=currentSessionID></p>
@@ -58,98 +65,98 @@
             <tr height="60px">
                 <td>
                     <button id="buttonFichas0" class="btnFichas">
-                        <img alt="btnFichas0" src='assets/Ficha1.png'></span>
+                        <img alt="btnFichas0" src='assets/Ficha1.png' width="60" height="60"></span>
                     </button>
                 </td>
                 <td>
                     <button id="buttonFichas1" class="btnFichas">
-                        <img alt="btnFichas1" src='assets/Ficha1.png'></span>
+                        <img alt="btnFichas1" src='assets/Ficha1.png' width="60" height="60"></span>
                 </td>
                 <td>
                     <button id="buttonFichas2" class="btnFichas">
-                        <img alt="btnFichas2" src='assets/Ficha1.png'></span>
+                        <img alt="btnFichas2" src='assets/Ficha1.png' width="60" height="60"></span>
                 </td>
                 <td>
                     <button id="buttonFichas3" class="btnFichas">
-                        <img alt="btnFichas3" src='assets/Ficha1.png'></span>
+                        <img alt="btnFichas3" src='assets/Ficha1.png' width="60" height="60"></span>
                 </td>
                 <td>
                     <button id="buttonFichas4" class="btnFichas">
-                        <img alt="btnFichas4" src='assets/Ficha1.png'></span>
+                        <img alt="btnFichas4" src='assets/Ficha1.png' width="60" height="60"></span>
                 </td>
                 <td>
                     <button id="buttonFichas5" class="btnFichas">
-                        <img alt="btnFichas5" src='assets/Ficha1.png'></span>
+                        <img alt="btnFichas5" src='assets/Ficha1.png' width="60" height="60"></span>
                 </td>
                 <td>
                     <button id="buttonFichas6" class="btnFichas">
-                        <img alt="btnFichas6" src='assets/Ficha1.png'></span>
+                        <img alt="btnFichas6" src='assets/Ficha1.png' width="60" height="60"></span>
                 </td>
             </tr>
 
-            <table width="570px" height="560px" align="center" id="boardBody">
-                <tr height="80px">
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
+            <table align="center" id="boardBody">
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
-                <tr height="80px">
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
-                <tr height="80px">
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
-                <tr height="80px">
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
-                <tr height="80px">
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
-                <tr height="80px">
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
-                <tr height="80px">
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
-                    <td bgcolor=#2b313a width="80px"> </td>
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
             </table>
     </div>

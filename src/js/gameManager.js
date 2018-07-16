@@ -39,13 +39,62 @@ var clickCantBtn5 = 0;
 var clickCantBtn6 = 0;
 /**/
 
+/*AUDIO*/
+var placePlayer1 = document.createElement('audio');
+var placePlayer2 = document.createElement('audio');
+var fullColumn = document.createElement('audio');
+var playerVictory = document.createElement('audio');
+var loopCounter = 0;
+var loopLimit = 0;
+
+placePlayer1.setAttribute('src', 'assets/sounds/player1.wav');
+placePlayer2.setAttribute('src', 'assets/sounds/player2.wav');
+fullColumn.setAttribute('src', 'assets/sounds/fullcolumn.wav');
+playerVictory.setAttribute('src', 'assets/sounds/win.wav');
+
+placePlayer1.addEventListener('ended', function() {
+    if (loopCounter < loopLimit) {
+        this.currentTime = 0;
+        this.play();
+        loopCounter++;
+    }
+}, false);
+
+placePlayer2.addEventListener('ended', function() {
+    if (loopCounter < loopLimit) {
+        this.currentTime = 0;
+        this.play();
+        loopCounter++;
+    }
+}, false);
+
+fullColumn.addEventListener('ended', function() {
+    if (loopCounter < loopLimit) {
+        this.currentTime = 0;
+        this.play();
+        loopCounter++;
+    }
+}, false);
+
+playerVictory.addEventListener('ended', function() {
+    if (loopCounter < loopLimit) {
+        this.currentTime = 0;
+        this.play();
+        loopCounter++;
+    }
+}, false);
+/**/
+
+/*TIMER*/
 var timer = new Timer();
+
 timer.start({
     countdown: true,
     startValues: {
         seconds: 16
     }
 });
+/**/
 
 $(document).ready(function() {
     //Constructor array tablero
@@ -58,18 +107,27 @@ $(document).ready(function() {
     }
     //Fin constructor array tablero
 
-    //Get del contenido del localStorage
+    //GET de la currentGameID desde el sessionStorage
     currentGameID = sessionStorage["4line_current_session_ID"];
-    currentLocalStorageContent = JSON.parse(localStorage.getItem("4line_games_sessions_ID:" + currentGameID));
+    //Crea un string con la key para pasarsela al localStorafe
+    var buildedLocalStorageKey = "4line_games_sessions_ID:" + currentGameID;
+
+    //SET del contenido del localStorage y lo guarda en un array
+    currentLocalStorageContent = JSON.parse(localStorage[buildedLocalStorageKey]);
+
+    //GET de los nombres de jugador
     player1Name = currentLocalStorageContent[0].currentGameSession.setupData.player1Name;
     player2Name = currentLocalStorageContent[0].currentGameSession.setupData.player2Name;
 
-    //Set del contenido del localStorage
+    //Sync del tablero actual y el tablero en el localStorage, de esta manera cuando se coloque una ficha, ambos tableros estarán sincronizados.
+    tablero = currentLocalStorageContent[0].currentGameSession.setupData.currentGameBoard;
+
+    //SET del contenido del localStorage
     $('#currentSessionID').text(currentGameID);
     $('#jugador1').text(player1Name);
     $('#jugador2').text(player2Name);
 
-    //Set de colores de los nombres de los jugadores
+    //SET de colores de los nombres de los jugadores
     $('#jugador1').css('color', 'lightgreen');
     $('#jugador2').css('color', 'red');
 
@@ -80,12 +138,14 @@ $(document).ready(function() {
     var btnSrc;
     var currentColumn = 0;
 
+/*COMIENZO DEL CONSTRUCTOR DE LOS BOTONES DE JUEGO*/
     $('#buttonFichas0').click(function() {
         selectedButton = "btn0-player1";
         idButton = "btnFichas0";
         clickCantBtn0++;
         timer.reset();
         if (turno == 0) {
+            placePlayer1.play();
             buttonState = 1;
             playerCode = 1;
             countButtonPlayer1 = countButtonPlayer1 + 1;
@@ -97,6 +157,7 @@ $(document).ready(function() {
                 $('img[alt=btnFichas0]').attr('src', 'assets/FichaDisabled.png');
                 // alert("Culumna llena!");
                 buttonState = -1;
+                fullColumn.play();
                 $('#buttonFichas0').prop("disabled", true);
                 throw new Error("Columna llena!");
             }
@@ -104,6 +165,7 @@ $(document).ready(function() {
         }
 
         if (turno == 1) {
+            placePlayer2.play();
             selectedButton = "btn0-player2";
             buttonState = 0;
             playerCode = 2;
@@ -116,6 +178,7 @@ $(document).ready(function() {
                 $('img[alt=btnFichas0]').attr('src', 'assets/FichaDisabled.png');
                 // alert("Culumna llena!");
                 buttonState = -1;
+                fullColumn.play();
                 $('#buttonFichas0').prop("disabled", true);
                 throw new Error("Columna llena!");
             }
@@ -129,6 +192,7 @@ $(document).ready(function() {
         clickCantBtn1++;
         timer.reset();
         if (turno == 0) {
+            placePlayer1.play();
             buttonState = 1;
             playerCode = 1;
             countButtonPlayer1 = countButtonPlayer1 + 1;
@@ -140,6 +204,7 @@ $(document).ready(function() {
                 $('img[alt=btnFichas1]').attr('src', 'assets/FichaDisabled.png');
                 // alert("Culumna llena!");
                 buttonState = -1;
+                fullColumn.play();
                 $('#buttonFichas1').prop("disabled", true);
                 throw new Error("Columna llena!");
             }
@@ -147,6 +212,7 @@ $(document).ready(function() {
         }
 
         if (turno == 1) {
+            placePlayer2.play();
             selectedButton = "btn1-player2";
             buttonState = 0;
             playerCode = 2;
@@ -159,6 +225,7 @@ $(document).ready(function() {
                 $('img[alt=btnFichas1]').attr('src', 'assets/FichaDisabled.png');
                 // alert("Culumna llena!");
                 buttonState = -1;
+                fullColumn.play();
                 $('#buttonFichas1').prop("disabled", true);
                 throw new Error("Columna llena!");
             }
@@ -172,6 +239,7 @@ $(document).ready(function() {
         clickCantBtn2++;
         timer.reset();
         if (turno == 0) {
+            placePlayer1.play();
             buttonState = 1;
             playerCode = 1;
             countButtonPlayer1 = countButtonPlayer1 + 1;
@@ -183,6 +251,7 @@ $(document).ready(function() {
                 $('img[alt=btnFichas2]').attr('src', 'assets/FichaDisabled.png');
                 // alert("Culumna llena!");
                 buttonState = -1;
+                fullColumn.play();
                 $('#buttonFichas2').prop("disabled", true);
                 throw new Error("Columna llena!");
             }
@@ -190,6 +259,7 @@ $(document).ready(function() {
         }
 
         if (turno == 1) {
+            placePlayer2.play();
             selectedButton = "btn2-player2";
             buttonState = 0;
             playerCode = 2;
@@ -202,6 +272,7 @@ $(document).ready(function() {
                 $('img[alt=btnFichas2]').attr('src', 'assets/FichaDisabled.png');
                 // alert("Culumna llena!");
                 buttonState = -1;
+                fullColumn.play();
                 $('#buttonFichas2').prop("disabled", true);
                 throw new Error("Columna llena!");
             }
@@ -215,6 +286,7 @@ $(document).ready(function() {
         clickCantBtn3++;
         timer.reset();
         if (turno == 0) {
+            placePlayer1.play();
             buttonState = 1;
             playerCode = 1;
             countButtonPlayer1 = countButtonPlayer1 + 1;
@@ -226,6 +298,7 @@ $(document).ready(function() {
                 $('img[alt=btnFichas3]').attr('src', 'assets/FichaDisabled.png');
                 // alert("Culumna llena!");
                 buttonState = -1;
+                fullColumn.play();
                 $('#buttonFichas3').prop("disabled", true);
                 throw new Error("Columna llena!");
             }
@@ -233,6 +306,7 @@ $(document).ready(function() {
         }
 
         if (turno == 1) {
+            placePlayer2.play();
             selectedButton = "btn3-player2";
             buttonState = 0;
             playerCode = 2;
@@ -245,6 +319,7 @@ $(document).ready(function() {
                 $('img[alt=btnFichas3]').attr('src', 'assets/FichaDisabled.png');
                 // alert("Culumna llena!");
                 buttonState = -1;
+                fullColumn.play();
                 $('#buttonFichas3').prop("disabled", true);
                 throw new Error("Columna llena!");
             }
@@ -258,6 +333,7 @@ $(document).ready(function() {
         clickCantBtn4++;
         timer.reset();
         if (turno == 0) {
+            placePlayer1.play();
             buttonState = 1;
             playerCode = 1;
             countButtonPlayer1 = countButtonPlayer1 + 1;
@@ -269,6 +345,7 @@ $(document).ready(function() {
                 $('img[alt=btnFichas4]').attr('src', 'assets/FichaDisabled.png');
                 // alert("Culumna llena!");
                 buttonState = -1;
+                fullColumn.play();
                 $('#buttonFichas4').prop("disabled", true);
                 throw new Error("Columna llena!");
             }
@@ -276,6 +353,7 @@ $(document).ready(function() {
         }
 
         if (turno == 1) {
+            placePlayer2.play();
             selectedButton = "btn4-player2";
             buttonState = 0;
             playerCode = 2;
@@ -288,6 +366,7 @@ $(document).ready(function() {
                 $('img[alt=btnFichas4]').attr('src', 'assets/FichaDisabled.png');
                 // alert("Culumna llena!");
                 buttonState = -1;
+                fullColumn.play();
                 $('#buttonFichas4').prop("disabled", true);
                 throw new Error("Columna llena!");
             }
@@ -301,6 +380,7 @@ $(document).ready(function() {
         clickCantBtn5++;
         timer.reset();
         if (turno == 0) {
+            placePlayer1.play();
             buttonState = 1;
             playerCode = 1;
             countButtonPlayer1 = countButtonPlayer1 + 1;
@@ -312,6 +392,7 @@ $(document).ready(function() {
                 $('img[alt=btnFichas5]').attr('src', 'assets/FichaDisabled.png');
                 // alert("Culumna llena!");
                 buttonState = -1;
+                fullColumn.play();
                 $('#buttonFichas5').prop("disabled", true);
                 throw new Error("Columna llena!");
             }
@@ -319,6 +400,7 @@ $(document).ready(function() {
         }
 
         if (turno == 1) {
+            placePlayer2.play();
             selectedButton = "btn5-player2";
             buttonState = 0;
             playerCode = 2;
@@ -331,6 +413,7 @@ $(document).ready(function() {
                 $('img[alt=btnFichas5]').attr('src', 'assets/FichaDisabled.png');
                 // alert("Culumna llena!");
                 buttonState = -1;
+                fullColumn.play();
                 $('#buttonFichas5').prop("disabled", true);
                 throw new Error("Columna llena!");
             }
@@ -344,6 +427,7 @@ $(document).ready(function() {
         clickCantBtn6++;
         timer.reset();
         if (turno == 0) {
+            placePlayer1.play();
             buttonState = 1;
             playerCode = 1;
             countButtonPlayer1 = countButtonPlayer1 + 1;
@@ -355,6 +439,7 @@ $(document).ready(function() {
                 $('img[alt=btnFichas6]').attr('src', 'assets/FichaDisabled.png');
                 // alert("Culumna llena!");
                 buttonState = -1;
+                fullColumn.play();
                 $('#buttonFichas6').prop("disabled", true);
                 throw new Error("Columna llena!");
             }
@@ -362,6 +447,7 @@ $(document).ready(function() {
         }
 
         if (turno == 1) {
+            placePlayer2.play();
             selectedButton = "btn6-player2";
             buttonState = 0;
             playerCode = 2;
@@ -374,6 +460,7 @@ $(document).ready(function() {
                 $('img[alt=btnFichas6]').attr('src', 'assets/FichaDisabled.png');
                 // alert("Culumna llena!");
                 buttonState = -1;
+                fullColumn.play();
                 $('#buttonFichas6').prop("disabled", true);
                 throw new Error("Columna llena!");
             }
@@ -381,33 +468,26 @@ $(document).ready(function() {
         }
     });
 
-    //Fin constructor
+    /*COMIENZO DEL CONSTRUCTOR DE LOS BOTONES DE JUEGO*/
 });
 
 function overWriteGameBoard() {
+    //Guarda el tablero actual en el localStorage
     currentLocalStorageContent[0].currentGameSession.setupData.currentGameBoard = tablero;
+    //Reescribe los datos actuales guardados en el localStorage
+    localStorage["4line_games_sessions_ID:" + currentGameID] = JSON.stringify(currentLocalStorageContent);
 }
 
-/*
-$(document).ready(function() {
-    tablero[5][0] = "";
-    tablero[4][1] = 1;
-    tablero[3][2] = 1;
-    tablero[2][3] = 1;
-});
-*/
-
 function playerTimeOut() {
-    // $("a").trigger("click");
-    //  var turnoTemp = turno + 1;
     var num = Math.floor(Math.random() * 7) + 0;
-    console.log("[TIMEOUT]" + num);
-    //buttonFichas4
+    //console.log("[TIMEOUT]" + num);
     var btnStr = "buttonFichas" + num;
-    console.log(btnStr);
+    //console.log(btnStr);
     document.getElementById(btnStr).click();
 }
 
+/*DEPRECATED*/
+/*
 function checkColumna() {
     var i, p;
     var tempColumn = [];
@@ -448,7 +528,8 @@ function getIndexOf() {
     }
     throw new Error("Index already founded!");
 }
-
+*/
+/*DEPRECATED*/
 
 function calculateInterval() {
     if (selectedButton == "btn0-player1" || selectedButton == "btn0-player2") {
@@ -603,7 +684,10 @@ function evaluacolumns() {
                 contador = 0;
             }
             if (contador == 4) {
+                playerVictory.play();
                 alert("Jugador 1 ha ganado [COLUMNA]");
+                //$('#fichasJugadores').fadeOut();
+                timer.stop();
                 return;
             }
             if (tablero[j][i] == 2) {
@@ -612,7 +696,10 @@ function evaluacolumns() {
                 contador2 = 0;
             }
             if (contador2 == 8) {
+                playerVictory.play();
                 alert("Jugador 2 ha ganado [COLUMNA]");
+                //$('#fichasJugadores').fadeOut();
+                timer.stop();
                 return;
             }
         }
@@ -631,7 +718,10 @@ function evaluaFilas() {
                 contador = 0;
             }
             if (contador == 4) {
+                playerVictory.play();
                 alert("Jugador 1 ha ganado [FILA]");
+                //$('#fichasJugadores').fadeOut();
+                timer.stop();
                 return;
             }
             if (tablero[i][j] == 2) {
@@ -640,7 +730,10 @@ function evaluaFilas() {
                 contador2 = 0;
             }
             if (contador2 == 8) {
+                playerVictory.play();
                 alert("Jugador 2 ha ganado [FILA]");
+                // $('#fichasJugadores').fadeOut();
+                timer.stop();
                 return;
             }
         }
@@ -651,11 +744,17 @@ function diagonalIzq() {
     for (var i = 5; i >= 3; i--) {
         for (var j = 0; j <= 3; j++) {
             if (tablero[i][j] == 1 && tablero[i - 1][j + 1] == 1 && tablero[i - 2][j + 2] == 1 && tablero[i - 3][j + 3] == 1) {
+                playerVictory.play();
                 alert("Jugador 1 ha ganado [DIAGIZQ]");
+                // $('#fichasJugadores').fadeOut();
+                timer.stop();
                 return;
             }
             if (tablero[i][j] == 2 && tablero[i - 1][j + 1] == 2 && tablero[i - 2][j + 2] == 2 && tablero[i - 3][j + 3] == 2) {
+                playerVictory.play();
                 alert("Jugador 2 ha ganado [DIAGIZQ]");
+                // $('#fichasJugadores').fadeOut();
+                timer.stop();
                 return;
             }
         }
@@ -668,11 +767,17 @@ function diagonalDer() {
     for (var i = 5; i >= 3; i--) {
         for (var j = 3; j <= 6; j++) {
             if (tablero[i][j] == 1 && tablero[i - 1][j - 1] == 1 && tablero[i - 2][j - 2] == 1 && tablero[i - 3][j - 3] == 1) {
+                playerVictory.play();
                 alert("Jugador 1 ha ganado [DIAGDER]");
+                // $('#fichasJugadores').fadeOut();
+                timer.stop();
                 return;
             }
             if (tablero[i][j] == 2 && tablero[i - 1][j - 1] == 2 && tablero[i - 2][j - 2] == 2 && tablero[i - 3][j - 3] == 2) {
+                playerVictory.play();
                 alert("Jugador 2 ha ganado [DIAGDER]");
+                // $('#fichasJugadores').fadeOut();
+                timer.stop();
                 return;
             }
         }
@@ -680,7 +785,7 @@ function diagonalDer() {
     return;
 }
 
-//Inicializador Timer
+/*INICIALIZADOR TIMER*/
 $('#currentTime .values').html(timer.getTimeValues().toString());
 timer.addEventListener('secondsUpdated', function(e) {
     $('#currentTime .values').html(timer.getTimeValues().toString(['seconds']));

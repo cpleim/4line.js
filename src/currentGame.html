@@ -17,6 +17,7 @@
 </head>
 
 <body>
+
     <!--
         <script src='https://rawgit.com/juliangarnier/anime/master/anime.min.js'></script>
         <script src="js/bgGenerator.js"></script>
@@ -25,6 +26,13 @@
         $(document).ready(function() {
             $('#refrescarTabla').click(function() {
                 //diagonalIzq();
+                for (var i = 0; i < tablero.length; i++) {
+        for (var j = 0; j < 7; j++) {
+            //numeroPos = numeroPos + 1
+            //tablero[i][j] = numeroPos;
+            tablero[i][j] = '';
+        }
+    }
                 reloadGameBoard();
             });
         });
@@ -33,7 +41,7 @@
 
             //var firstRow = document.getElementById("boardBody").rows[0];
             //var x = firstRow.insertCell(0);
-           // x.innerHTML = "<img src='"+playerButtons[0].player1IMG+"' id=1/>";
+            // x.innerHTML = "<img src='"+playerButtons[0].player1IMG+"' id=1/>";
 
         });
     </script>
@@ -41,23 +49,24 @@
         <img src="assets/4LineBanner.gif" width="340" height="120">
     </div>
     <div id="contenedor_jugadores">
-        <p>Jugadores</p>
-        ------------------------ Jugador 1:
-        <p id="jugador1"></p>
-        Jugador 2:
-        <p id="jugador2"></p>
-        <p>Turno de:</p>
-        <p id="currentPlayer"></p>
-        <br>------------------------</br>
-        <p>Tiempo transcurrido</p>
-        <div id=currentTime>
-            <div class="values"></div>
+        <p align="center">JUGADORES</p>
+        <p align="center">--------------------------------</p>
+        <p align="center">~Jugador 1~</p>
+        <p align="center" id="jugador1"></p>
+        <p align="center">~Jugador 2~</p>
+        <p align="center" id="jugador2"></p>
+        <p align="center">~Turno de~</p>
+        <b><p align="center" id="currentPlayer"></p></b>
+        <p align="center">--------------------------------</p>
+        <p align="center">~Tiempo transcurrido~</p>
+        <div align="center" id=currentTime>
+            <div align="center" class="values"></div>
         </div>
-        <br>------------------------</br>
-        <p>Identificador de partida</p>
-        <p id=currentSessionID></p>
-        <br>------------------------</br>
-        <button id='refrescarTabla'>Refrescar Tabla</button>
+        <p align="center">--------------------------------</p>
+        <p align="center">~ID de partida~</p>
+        <p align="center" id=currentSessionID></p>
+        <p align="center">--------------------------------</p>
+        <button id='refrescarTabla'>Dummy Button</button>
     </div>
 
     <div id="alignRight">
@@ -93,7 +102,13 @@
                         <img alt="btnFichas6" src='assets/Ficha1.png' width="60" height="60"></span>
                 </td>
             </tr>
-
+            <div id="canvasTablero">
+                <br>
+                <br>
+                <br>
+                <br>
+<img src="assets/Tablero.png" width="563" height="483">
+</div>
             <table align="center" id="boardBody">
                 <tr>
                     <td> </td>
@@ -159,8 +174,7 @@
                     <td> </td>
                 </tr>
             </table>
-    </div>
-
+</div>
 </body>
 
 </html>

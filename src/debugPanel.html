@@ -30,7 +30,7 @@
             $("#retrieveFromLocalStorage").click(function() {
                 gameIDKey = $("#gameIDKey").val();
                 storedGames = JSON.parse(localStorage.getItem("4line_games_sessions_ID:" + gameIDKey));
-                if(localStorage.length == 0){
+                if (localStorage.length == 0) {
                     alert("Aún no hay ningún dato almacenado en el localStorage :(");
                     return;
                 }

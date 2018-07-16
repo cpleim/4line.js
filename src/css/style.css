@@ -26,6 +26,10 @@ body {
   z-index: -1;
 }
 
+#canvasTablero{
+position: absolute;
+  z-index: -2;
+}
 
 #contenedor_login {
   height: 500px;
@@ -49,7 +53,9 @@ body {
 
 
 #boardBody td{
+   /*
     border: 3px solid #F0F0F0;
+    */
     padding: 5px;
     text-align: center;
     width:80px;
@@ -84,7 +90,7 @@ height:80px;
 
 
 .btnFichas{
-  background-color: Transparent;
+    background-color: Transparent;
     background-repeat:no-repeat;
     border: none;
     cursor:pointer;

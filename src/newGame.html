@@ -23,6 +23,48 @@
         var gamesSessions = [];
         var inUseGameIDs = [];
         var player1Name, player2Name, gameCode, generatedGameID;
+        var audioMenu = document.createElement('audio');
+
+        var loopCounter = 0;
+        var loopLimit = 0;
+
+        audioMenu.setAttribute('src', 'assets/sounds/menu.wav');
+
+        audioMenu.addEventListener('ended', function() {
+        //this.play();
+        if (loopCounter < loopLimit){
+        this.currentTime = 0;
+        this.play();
+        loopCounter++;
+    }
+    
+    }, false);
+
+
+
+    //document.getElementById(playAudio).click();
+
+
+        $(document).ready(function() {
+    //Constructor array tablero
+    for (var i = 0; i < tablero.length; i++) {
+        for (var j = 0; j < 7; j++) {
+            //numeroPos = numeroPos + 1
+            //tablero[i][j] = numeroPos;
+            tablero[i][j] = '';
+        }
+    }
+});
+
+$(document).ready(function(){
+    //document.getElementById(playAudio).click();
+$("#playAudio").click(function(){
+        audioMenu.play();
+
+
+});
+});
+
         $(document).ready(function() {
             $("#newGame").click(function() {
                 if ($("#jugador1").val() == "" || $("#jugador2").val() == "") {
@@ -41,23 +83,29 @@
                 });
                 generatedGameID = gamesSessions[0].currentGameSession.gameID;
                 inUseGameIDs.push(generatedGameID);
+
                 sessionStorage.setItem("4line_current_session_ID", generatedGameID);
-                localStorage.setItem("4line_games_sessions_ID:" + generatedGameID + gamesSessions);
+
+                localStorage["4line_games_sessions_ID:" + generatedGameID] = JSON.stringify(gamesSessions);//SET
+
                 console.log("[4Line]--> STORED IN LOCALSTORAGE!");
-                //var gameURL = "currentGame.html";
-                //document.location.href = gameURL;
-                
+
+                var gameURL = "currentGame.html";
+                document.location.href = gameURL;
+
                 //Para traer las sesiones de juego desde el local storage
                 //var storedSessions = JSON.parse(localStorage.getItem("4line_games_sessions_ID:"+id del juego));
             });
 
         });
 
+        //SESSIONID VA A SER IGUAL AL SESSION ID QUE SE ENCONTRO
+
         $(document).ready(function() {
             $("#resumeGame").click(function() {
                 gameIDKey = $("#resumeGameID").val();
                 storedGames = JSON.parse(localStorage.getItem("4line_games_sessions_ID:" + gameIDKey));
-                if(localStorage.length == 0){
+                if (localStorage.length == 0) {
                     alert("Aún no hay ningún dato almacenado en el localStorage :(");
                     return;
                 }
@@ -65,19 +113,25 @@
                     alert("gameID no encontrado!");
                 } else {
                     alert("encontrado!");
-                    console.log(storedGames);
+                    sessionStorage.setItem("4line_current_session_ID", gameIDKey);
+                    var gameURL = "currentGame.html";
+                document.location.href = gameURL;
+
+                    //console.log(storedGames);
                 }
             });
         });
 
-        $(document).ready(function(){
-var names = [];
-names[0] = prompt("New member name?");
-localStorage.setItem("names", JSON.stringify(names));
+        /*
+                $(document).ready(function(){
+        var names = [];
+        names[0] = prompt("New member name?");
+        localStorage.setItem("names", JSON.stringify(names));
 
-//...
- storedNames = JSON.parse(localStorage.getItem("names"));
-        });
+        //...
+         storedNames = JSON.parse(localStorage.getItem("names"));
+                });
+                */
     </script>
 </head>
 
@@ -105,6 +159,9 @@ localStorage.setItem("names", JSON.stringify(names));
     </div>
     <div id='contenedor_login'>
         <img src="assets/divLogin.png" width="400" height="500">
+    </div>
+    <div display="none">
+        <button id="playAudio">PLAY</button>
     </div>
 </body>
 

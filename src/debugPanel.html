@@ -43,6 +43,25 @@
 
             });
         });
+
+        $(document).ready(function() {
+            $("#clearLocalStorage").click(function() {
+                var msg;
+                var confirmDeleteFromLocalStorage = confirm("ADVERTENCIA: Está a punto de eliminar los datos del localStorage.\nEsto no se puede deshacer.\nDesa continuar?");
+                if (confirmDeleteFromLocalStorage == true) {
+                    msg = "[CONSOLE]--> Eliminado";
+                    localStorage.clear();
+                    console.log(msg);
+                } else {
+                    msg = "[CONSOLE]--> Accion cancelada";
+                    console.log(msg);
+                }
+            });
+            $('#toMenu').click(function() {
+                var gameURL = "newGame.html";
+                document.location.href = gameURL;
+            });
+        });
     </script>
 </head>
 
@@ -56,16 +75,23 @@
     </div>
     <div id="contenedor_controles" align="center">
         <p>PANEL DE DEPURACIÓN</p>
+        <br>
         <p>---Eliminar de localStorage---</p>
-        <br>localStorage Key: <input type="text" id="localStorageKey"></input>
-        </br>
+        localStorage Key: <input type="text" id="localStorageKey"></input>
         <br><button id="removeFromLocalStorage">Eliminar!</button></br>
+        </br>
+        <br>
+        <p>---Eliminar todos los datos de localStorage---</p>
+        <button id="clearLocalStorage">Borrar localStorage</button></br>
+        </br>
+        <br>
         <p></p>
         <p>---Mostrar datos en localStorage---</p>
-        <br>gameID: <input type="text" id="gameIDKey"></input>
+        gameID: <input type="text" id="gameIDKey"></input>
         </br>
-        <br><button id="retrieveFromLocalStorage">Mostrar</button></br>
+        <button id="retrieveFromLocalStorage">Mostrar</button></br>
         <p></p>
+        <br><button id="toMenu">Ir al menu principal</button></br>
     </div>
     <div id='contenedor_login'>
         <img src="assets/divLogin.png" width="400" height="500">

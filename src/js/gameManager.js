@@ -25,6 +25,7 @@ var clickCantBtn4 = 0;
 var clickCantBtn5 = 0;
 var clickCantBtn6 = 0;
 var victoryTimes = 0;
+var boardBodyDesign = [];
 
 /*AUDIO*/
 var placePlayer1 = document.createElement('audio');
@@ -577,6 +578,7 @@ function calculateInterval() {
         diagonalIzq();
         diagonalDer();
         overWriteGameBoard();
+        syncGameBoardDesign();
         return;
     }
     if (selectedButton == "btn1-player1" || selectedButton == "btn1-player2") {
@@ -587,6 +589,7 @@ function calculateInterval() {
         diagonalIzq();
         diagonalDer();
         overWriteGameBoard();
+        syncGameBoardDesign();
         return;
     }
     if (selectedButton == "btn2-player1" || selectedButton == "btn2-player2") {
@@ -597,6 +600,7 @@ function calculateInterval() {
         diagonalIzq();
         diagonalDer();
         overWriteGameBoard();
+        syncGameBoardDesign();
         return;
     }
     if (selectedButton == "btn3-player1" || selectedButton == "btn3-player2") {
@@ -607,6 +611,7 @@ function calculateInterval() {
         diagonalIzq();
         diagonalDer();
         overWriteGameBoard();
+        syncGameBoardDesign();
         return;
     }
     if (selectedButton == "btn4-player1" || selectedButton == "btn4-player2") {
@@ -617,6 +622,7 @@ function calculateInterval() {
         diagonalIzq();
         diagonalDer();
         overWriteGameBoard();
+        syncGameBoardDesign();
         return;
     }
     if (selectedButton == "btn5-player1" || selectedButton == "btn5-player2") {
@@ -627,6 +633,7 @@ function calculateInterval() {
         diagonalIzq();
         diagonalDer();
         overWriteGameBoard();
+        syncGameBoardDesign();
         return;
     }
     if (selectedButton == "btn6-player1" || selectedButton == "btn6-player2") {
@@ -637,6 +644,7 @@ function calculateInterval() {
         diagonalIzq();
         diagonalDer();
         overWriteGameBoard();
+        syncGameBoardDesign();
         return;
     }
 }
@@ -666,9 +674,27 @@ function storeWinner() {
     var currentWinner = $('#currentPlayer').text();
     sessionStorage.setItem("4line_current_Winner", currentWinner);
     currentLocalStorageContent[0].currentGameSession.setupData.victoryTimes = currentLocalStorageContent[0].currentGameSession.setupData.victoryTimes + 1;
-    localStorage["4line_games_sessions_ID:" + currentGameID] = JSON.stringify(currentLocalStorageContent); 
+    localStorage["4line_games_sessions_ID:" + currentGameID] = JSON.stringify(currentLocalStorageContent);
     var gameURL = "Winner.html";
     document.location.href = gameURL;
+}
+
+function syncGameBoardDesign() {
+    var myTable = document.getElementById("boardBody");
+    var current, cell;
+    //this loop goes through each row
+    for (var i = 0;
+        (current = myTable.rows[i]); i++) {
+        //this loop goes through each cell in current row
+        for (var j = 0;
+            (cell = current.cells[j]); j++) {
+            //do your cell thing here.
+            boardBodyDesign.push(cell);
+        }
+
+    }
+    currentLocalStorageContent[0].currentGameSession.setupData.currentBoardDesign = boardBodyDesign;
+    localStorage["4line_games_sessions_ID:" + currentGameID] = JSON.stringify(currentLocalStorageContent);
 }
 
 function reloadButtonImage() {

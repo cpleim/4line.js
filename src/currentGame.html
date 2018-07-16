@@ -19,29 +19,29 @@
 </head>
 
 <body>
-    
-        <script src='https://rawgit.com/juliangarnier/anime/master/anime.min.js'></script>
-        <script src="js/bgGenerator.js"></script>
-        
+
+    <script src='https://rawgit.com/juliangarnier/anime/master/anime.min.js'></script>
+    <script src="js/bgGenerator.js"></script>
+
     <script>
         $(document).ready(function() {
             $('#refrescarTabla').click(function() {
                 for (var i = 0; i < tablero.length; i++) {
-        for (var j = 0; j < 7; j++) {
-            //numeroPos = numeroPos + 1
-            //tablero[i][j] = numeroPos;
-            tablero[i][j] = '';
-        }
-    }
+                    for (var j = 0; j < 7; j++) {
+                        //numeroPos = numeroPos + 1
+                        //tablero[i][j] = numeroPos;
+                        tablero[i][j] = '';
+                    }
+                }
                 reloadGameBoard();
             });
         });
         $(document).ready(function() {
             reloadGameBoard();
             $('#stap').click(function() {
-timer.stop();
-           
-});
+                timer.stop();
+
+            });
         });
     </script>
     <div id='contenedor_banner' align="center">
@@ -107,8 +107,8 @@ timer.stop();
                 <br>
                 <br>
                 <br>
-<img src="assets/Tablero.png" width="563" height="483">
-</div>
+                <img src="assets/Tablero.png" width="563" height="483">
+            </div>
             <table align="center" id="boardBody">
                 <tr>
                     <td> </td>
@@ -174,7 +174,7 @@ timer.stop();
                     <td> </td>
                 </tr>
             </table>
-</div>
+    </div>
 
 </body>
 

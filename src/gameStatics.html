@@ -14,17 +14,31 @@
     <!--GAEGU FONT-->
 </head>
 <script type="text/javascript">
-        var retrievedLocalStorageData = [];
-    var usedGameIDs;
-    $(document).ready(function(){
+    $(document).ready(function() {
+        $('#toMenu').click(function() {
+            var gameURL = "newGame.html";
+            document.location.href = gameURL;
+        });
+    });
 
-    usedGameIDs = JSON.parse(localStorage["4line_usedIDs:"]);
+    $(document).ready(function() {
+        //GET de la currentGameID desde el sessionStorage
+        var currentGameID = sessionStorage["4line_current_session_ID"];
+        //Crea un string con la key para pasarsela al localStorafe
+        var buildedLocalStorageKey = "4line_games_sessions_ID:" + currentGameID;
 
-    for (var i = 0; i < usedGameIDs.length; i++) {
-        var buildedLocalStorageKey = "4line_games_sessions_ID:" + usedGameIDs[i];
-        retrievedLocalStorageData = JSON.parse(localStorage[buildedLocalStorageKey]);
-    }
-});
+        //SET del contenido del localStorage y lo guarda en un array
+        currentLocalStorageContent = JSON.parse(localStorage[buildedLocalStorageKey]);
+        var victoryCant = currentLocalStorageContent[0].currentGameSession.setupData.victoryTimes;
+
+        var pl1 = currentLocalStorageContent[0].currentGameSession.setupData.player1Name;
+        var pl2 = currentLocalStorageContent[0].currentGameSession.setupData.player2Name;
+
+        $('#victorias').text(victoryCant);
+        $('#cualID').text(currentGameID);
+        $('#pl1').text(pl1);
+        $('#pl2').text(pl2);
+    });
 </script>
 
 <body>
@@ -35,11 +49,28 @@
     <div id='contenedor_banner' align="center">
         <img src="assets/4LineBanner.gif" width="600" height="200">
     </div>
-
-
+    <div id="contenedor_controles" align="center">
+        <br>
+        <br>
+        <p>Cantidad de victorias en la ultima partida jugada</p>
+        <p id='victorias'></p>
+        <br>
+        <br>
+        <p>ID perteneciente de partida</p>
+        <p id='cualID'></p>
+        <br>
+        <br>
+        <p>Jugadores</p>
+        <p id='pl1'></p>
+        <p id='pl2'></p>
+    </div>
     <div id='contenedor_login'>
         <img src="assets/divLogin.png" width="400" height="500">
+        <div align="center">
+            <button id='toMenu'>Ir al menú principal</button>
+        </div>
     </div>
+
 </body>
 
 </html>

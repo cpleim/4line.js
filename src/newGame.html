@@ -21,6 +21,7 @@
             [],
             [],
         ];
+
         var storedNames;
         var gamesSessions = [];
         var inUseGameIDs = [];
@@ -31,7 +32,24 @@
         var loopLimit = 0;
         var victoryTimes = 0;
 
-        
+        var boardBodyDesign = [];
+
+        $(document).ready(function() {
+            var myTable = document.getElementById("boardBody");
+            var current, cell;
+            //this loop goes through each row
+            for (var i = 0;
+                (current = myTable.rows[i]); i++) {
+                //this loop goes through each cell in current row
+                for (var j = 0;
+                    (cell = current.cells[j]); j++) {
+                    //do your cell thing here.
+                    boardBodyDesign.push(cell);
+                }
+
+            }
+
+        });
 
         audioMenu.setAttribute('src', 'assets/sounds/menu.wav');
 
@@ -67,7 +85,7 @@
                     alert("Ingrese los nombres de los dos jugadores!");
                     return;
                 }
-                
+
                 gamesSessions.push({
                     currentGameSession: {
                         gameID: Math.random().toString(36).slice(2),
@@ -75,7 +93,8 @@
                             player1Name: $("#jugador1").val(),
                             player2Name: $("#jugador2").val(),
                             currentGameBoard: tablero,
-                            victoryTimes: victoryTimes
+                            victoryTimes: victoryTimes,
+                            currentBoardDesign: boardBodyDesign
                         }
                     }
 
@@ -84,7 +103,7 @@
                 generatedGameID = gamesSessions[0].currentGameSession.gameID;
                 inUseGameIDs.push(generatedGameID);
 
-                localStorage["4line_usedIDs:"] = JSON.stringify(inUseGameIDs);
+                //localStorage["4line_usedIDs"] = JSON.stringify(inUseGameIDs);
 
                 sessionStorage.setItem("4line_current_session_ID", generatedGameID);
 
@@ -121,6 +140,13 @@
                 }
             });
         });
+
+        $(document).ready(function() {
+            $('#toStatics').click(function() {
+                var gameURL = "gameStatics.html";
+                document.location.href = gameURL;
+            });
+        });
     </script>
 </head>
 
@@ -146,7 +172,7 @@
         <br>Codigo de juego: <input type="text" id="resumeGameID"></input>
         </br>
         <br><button id="resumeGame">Continuar juego</button></br>
-        <br><button id="estadisticas">Ver estadísticas</button></br>
+        <br><button id="toStatics">Ver estadísticas</button></br>
     </div>
     <div id='contenedor_login'>
         <img src="assets/divLogin.png" width="400" height="500">
@@ -154,73 +180,73 @@
     <div display="none">
         <button id="playAudio">PLAY</button>
     </div>
-<div id='tbContainer' display="none">
-<table align="center" id="boardBody">
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-            </table>
-</div>
+    <div id='tbContainer' display="none">
+        <table align="center" id="boardBody">
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+            </tr>
+        </table>
+    </div>
 </body>
 
 </html>

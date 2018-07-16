@@ -14,11 +14,21 @@
     <!--GAEGU FONT-->
 </head>
 <script type="text/javascript">
-    $(document).ready(function(){
-    var currentWinner = sessionStorage["4line_current_Winner"];
-    $('#winnerName').text(currentWinner);
-});
+    $(document).ready(function() {
+        var currentWinner = sessionStorage["4line_current_Winner"];
+        $('#winnerName').text(currentWinner);
+
+        $('#playAgain').click(function() {
+            var gameURL = "newGame.html";
+            document.location.href = gameURL;
+        });
+        $('#showStatics').click(function() {
+            var gameURL = "gameStatics.html";
+            document.location.href = gameURL;
+        });
+    });
 </script>
+
 <body>
 
     <script src='https://rawgit.com/juliangarnier/anime/master/anime.min.js'></script>
@@ -33,7 +43,12 @@
     </div>
     <div id='contenedor_win'>
         <img src="assets/winner.png" width="300" height="333">
+        <div align="center">
+            <button id='playAgain'>Ir al menú</button>
+            <button id='showStatics'>Mostrar estadísticas</button>
+        </div>
     </div>
+
 </body>
 
 </html>

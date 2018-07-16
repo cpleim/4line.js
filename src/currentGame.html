@@ -12,16 +12,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel='stylesheet prefetch' href='css/ewxggx.css'>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
+    <!--GAEGU FONT-->
     <script type="text/javascript" src="js/gameManager.js">
     </script>
 </head>
 
 <body>
-
-    <!--
+    
         <script src='https://rawgit.com/juliangarnier/anime/master/anime.min.js'></script>
         <script src="js/bgGenerator.js"></script>
-        -->
+        
     <script>
         $(document).ready(function() {
             $('#refrescarTabla').click(function() {
@@ -38,35 +39,37 @@
         });
         $(document).ready(function() {
             reloadGameBoard();
-
-            //var firstRow = document.getElementById("boardBody").rows[0];
+            $('#stap').click(function() {
+timer.stop();
+           // var firstRow = document.getElementById("boardBody").rows[0];
             //var x = firstRow.insertCell(0);
-            // x.innerHTML = "<img src='"+playerButtons[0].player1IMG+"' id=1/>";
-
+             //firstRow.innerHTML = "<img src='"+playerButtons[0].player1IMG+"' id=1/>";
+});
         });
     </script>
     <div id='contenedor_banner' align="center">
         <img src="assets/4LineBanner.gif" width="340" height="120">
     </div>
     <div id="contenedor_jugadores">
-        <p align="center">JUGADORES</p>
-        <p align="center">--------------------------------</p>
-        <p align="center">~Jugador 1~</p>
+        <p align="center">-JUGADORES-</p>
+        <br>
+        <p align="center">Jugador 1</p>
         <p align="center" id="jugador1"></p>
-        <p align="center">~Jugador 2~</p>
+        <p align="center">Jugador 2</p>
         <p align="center" id="jugador2"></p>
-        <p align="center">~Turno de~</p>
+        <br>
+        <p align="center">Turno de:</p>
         <b><p align="center" id="currentPlayer"></p></b>
-        <p align="center">--------------------------------</p>
-        <p align="center">~Tiempo transcurrido~</p>
+        <br>
+        <p align="center">Turno finaliza en:</p>
         <div align="center" id=currentTime>
             <div align="center" class="values"></div>
         </div>
-        <p align="center">--------------------------------</p>
-        <p align="center">~ID de partida~</p>
+        <br>
+        <p align="center">-ID de partida-</p>
         <p align="center" id=currentSessionID></p>
-        <p align="center">--------------------------------</p>
-        <button id='refrescarTabla'>Dummy Button</button>
+        <button id='refrescarTabla' align="center">Dummy Button</button>
+        <button id='stap' align="center">STOP</button>
     </div>
 
     <div id="alignRight">
@@ -175,6 +178,7 @@
                 </tr>
             </table>
 </div>
+
 </body>
 
 </html>

@@ -7,18 +7,9 @@ var tablero = [
     [],
 ];
 
-var playerButtons = [{
-    player1IMG: 'assets/Ficha1.png',
-    player1Val: 1
-}, {
-    player2IMG: 'assets/Ficha2.png',
-    player2Val: 2
-}];
-
 var player1Name, player2Name, currentGameID, currentLocalStorageContent;
-var numeroFila, numeroColumna;
 var numeroPos = 0;
-var selectedButton, selectedColumn, intervaloResultante, largestNumber, foundedIndex, playerCode;
+var selectedButton, intervaloResultante, playerCode;
 var countButtonPlayer1 = 0;
 var countButtonPlayer2 = 0;
 var currentColumn = 0;
@@ -26,6 +17,7 @@ var buttonState = 0;
 var sumaColumna = 0;
 var player1Column = [];
 var player2Culumn = [];
+var availabeButtons = ['btnFichas0','btnFichas1','btnFichas2','btnFichas3','btnFichas4','btnFichas5','btnFichas6'];
 
 /*EXPERIMENTAL*/
 var turno = 0;
@@ -44,6 +36,7 @@ var placePlayer1 = document.createElement('audio');
 var placePlayer2 = document.createElement('audio');
 var fullColumn = document.createElement('audio');
 var playerVictory = document.createElement('audio');
+var playerTimeoutWarning = document.createElement('audio');
 var loopCounter = 0;
 var loopLimit = 0;
 
@@ -51,6 +44,7 @@ placePlayer1.setAttribute('src', 'assets/sounds/player1.wav');
 placePlayer2.setAttribute('src', 'assets/sounds/player2.wav');
 fullColumn.setAttribute('src', 'assets/sounds/fullcolumn.wav');
 playerVictory.setAttribute('src', 'assets/sounds/win.wav');
+playerTimeoutWarning.setAttribute('src', 'assets/sounds/timeout.wav');
 
 placePlayer1.addEventListener('ended', function() {
     if (loopCounter < loopLimit) {
@@ -83,6 +77,13 @@ playerVictory.addEventListener('ended', function() {
         loopCounter++;
     }
 }, false);
+playerTimeoutWarning.addEventListener('ended', function() {
+    if (loopCounter < loopLimit) {
+        this.currentTime = 0;
+        this.play();
+        loopCounter++;
+    }
+}, false);
 /**/
 
 /*TIMER*/
@@ -91,7 +92,7 @@ var timer = new Timer();
 timer.start({
     countdown: true,
     startValues: {
-        seconds: 16
+        seconds: 15
     }
 });
 /**/
@@ -159,7 +160,9 @@ $(document).ready(function() {
                 buttonState = -1;
                 fullColumn.play();
                 $('#buttonFichas0').prop("disabled", true);
-                throw new Error("Columna llena!");
+                removeAvailableButton();
+                checkForMatch();
+                //throw new Error("Columna llena!");
             }
             return;
         }
@@ -180,7 +183,9 @@ $(document).ready(function() {
                 buttonState = -1;
                 fullColumn.play();
                 $('#buttonFichas0').prop("disabled", true);
-                throw new Error("Columna llena!");
+                removeAvailableButton();
+                checkForMatch();
+                //throw new Error("Columna llena!");
             }
             return;
         }
@@ -206,7 +211,9 @@ $(document).ready(function() {
                 buttonState = -1;
                 fullColumn.play();
                 $('#buttonFichas1').prop("disabled", true);
-                throw new Error("Columna llena!");
+                removeAvailableButton();
+                checkForMatch();
+                //throw new Error("Columna llena!");
             }
             return;
         }
@@ -227,7 +234,9 @@ $(document).ready(function() {
                 buttonState = -1;
                 fullColumn.play();
                 $('#buttonFichas1').prop("disabled", true);
-                throw new Error("Columna llena!");
+                removeAvailableButton();
+                checkForMatch();
+                //throw new Error("Columna llena!");
             }
             return;
         }
@@ -253,7 +262,9 @@ $(document).ready(function() {
                 buttonState = -1;
                 fullColumn.play();
                 $('#buttonFichas2').prop("disabled", true);
-                throw new Error("Columna llena!");
+                removeAvailableButton();
+                checkForMatch();
+                //throw new Error("Columna llena!");
             }
             return;
         }
@@ -274,7 +285,9 @@ $(document).ready(function() {
                 buttonState = -1;
                 fullColumn.play();
                 $('#buttonFichas2').prop("disabled", true);
-                throw new Error("Columna llena!");
+                removeAvailableButton();
+                checkForMatch();
+                //throw new Error("Columna llena!");
             }
             return;
         }
@@ -300,7 +313,9 @@ $(document).ready(function() {
                 buttonState = -1;
                 fullColumn.play();
                 $('#buttonFichas3').prop("disabled", true);
-                throw new Error("Columna llena!");
+                removeAvailableButton();
+                checkForMatch();
+                //throw new Error("Columna llena!");
             }
             return;
         }
@@ -321,7 +336,9 @@ $(document).ready(function() {
                 buttonState = -1;
                 fullColumn.play();
                 $('#buttonFichas3').prop("disabled", true);
-                throw new Error("Columna llena!");
+                removeAvailableButton();
+                checkForMatch();
+                //throw new Error("Columna llena!");
             }
             return;
         }
@@ -347,7 +364,9 @@ $(document).ready(function() {
                 buttonState = -1;
                 fullColumn.play();
                 $('#buttonFichas4').prop("disabled", true);
-                throw new Error("Columna llena!");
+                removeAvailableButton();
+                checkForMatch();
+                //throw new Error("Columna llena!");
             }
             return;
         }
@@ -368,7 +387,9 @@ $(document).ready(function() {
                 buttonState = -1;
                 fullColumn.play();
                 $('#buttonFichas4').prop("disabled", true);
-                throw new Error("Columna llena!");
+                removeAvailableButton();
+                checkForMatch();
+                //throw new Error("Columna llena!");
             }
             return;
         }
@@ -394,7 +415,9 @@ $(document).ready(function() {
                 buttonState = -1;
                 fullColumn.play();
                 $('#buttonFichas5').prop("disabled", true);
-                throw new Error("Columna llena!");
+                removeAvailableButton();
+                checkForMatch();
+                //throw new Error("Columna llena!");
             }
             return;
         }
@@ -415,7 +438,9 @@ $(document).ready(function() {
                 buttonState = -1;
                 fullColumn.play();
                 $('#buttonFichas5').prop("disabled", true);
-                throw new Error("Columna llena!");
+                removeAvailableButton();
+                checkForMatch();
+                //throw new Error("Columna llena!");
             }
             return;
         }
@@ -441,7 +466,9 @@ $(document).ready(function() {
                 buttonState = -1;
                 fullColumn.play();
                 $('#buttonFichas6').prop("disabled", true);
-                throw new Error("Columna llena!");
+                removeAvailableButton();
+                checkForMatch();
+                //throw new Error("Columna llena!");
             }
             return;
         }
@@ -462,7 +489,9 @@ $(document).ready(function() {
                 buttonState = -1;
                 fullColumn.play();
                 $('#buttonFichas6').prop("disabled", true);
-                throw new Error("Columna llena!");
+                removeAvailableButton();
+                checkForMatch();
+                //throw new Error("Columna llena!");
             }
             return;
         }
@@ -470,6 +499,22 @@ $(document).ready(function() {
 
     /*COMIENZO DEL CONSTRUCTOR DE LOS BOTONES DE JUEGO*/
 });
+
+function removeAvailableButton(){
+    for (var i = 0; i < availabeButtons.length; i++) {
+        if(availabeButtons[i] == idButton){
+            availabeButtons.splice(i, 1);
+            return;
+        }
+    }
+}
+
+function checkForMatch(){
+    if (availabeButtons.length == 0){
+        alert("EMPATE!");
+        return;
+    }
+}
 
 function overWriteGameBoard() {
     //Guarda el tablero actual en el localStorage
@@ -479,6 +524,7 @@ function overWriteGameBoard() {
 }
 
 function playerTimeOut() {
+    playerTimeoutWarning.play();
     var num = Math.floor(Math.random() * 7) + 0;
     //console.log("[TIMEOUT]" + num);
     var btnStr = "buttonFichas" + num;
@@ -627,25 +673,25 @@ function reloadGameBoard() {
 
 function reloadButtonImage() {
     if (buttonState == 1) {
+        for (var i = 0; i < availabeButtons.length; i++) {
+           $('img[alt="'+availabeButtons[i]+'"]').attr('src', 'assets/Ficha2.png');
+        }
+        /*
         $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
-        $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha2.png');
-        $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha2.png');
-        $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha2.png');
-        $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha2.png');
-        $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha2.png');
-        $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha2.png');
+        */
         $('#currentPlayer').text(player2Name);
+        return;
     }
 
     if (buttonState == 0) {
-        $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha1.png');
-        $('img[alt="btnFichas1"]').attr('src', 'assets/Ficha1.png');
-        $('img[alt="btnFichas2"]').attr('src', 'assets/Ficha1.png');
-        $('img[alt="btnFichas3"]').attr('src', 'assets/Ficha1.png');
-        $('img[alt="btnFichas4"]').attr('src', 'assets/Ficha1.png');
-        $('img[alt="btnFichas5"]').attr('src', 'assets/Ficha1.png');
-        $('img[alt="btnFichas6"]').attr('src', 'assets/Ficha1.png');
+      for (var i = 0; i < availabeButtons.length; i++) {
+           $('img[alt="'+availabeButtons[i]+'"]').attr('src', 'assets/Ficha1.png');
+        }
+        /*
+        $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
+        */
         $('#currentPlayer').text(player1Name);
+        return;
     }
     if (buttonState == -1) {
         $('#currentPlayer').text(player2Name);
@@ -654,12 +700,22 @@ function reloadButtonImage() {
 }
 
 function saveficha() {
+    var gameBoard = document.getElementById("boardBody");
+    var fichita1 = '<img src="assets/Ficha1.png"></>';
+    var fichita2 = '<img src="assets/Ficha2.png"></>';
     for (var i = tablero.length - 1; i >= 0; i--) {
         for (var j = intervaloResultante - 1; j < 7; j++) {
-
             if (tablero[i][j] == "") {
                 tablero[i][j] = playerCode;
-                reloadGameBoard();
+                if (turno == 0){
+                  gameBoard.rows[i].cells[j].innerHTML = fichita1; 
+                  return; 
+                }
+                if(turno == 1){
+                    gameBoard.rows[i].cells[j].innerHTML = fichita2; 
+                return;
+                }
+                //reloadGameBoard();
                 return;
             }
             i--;

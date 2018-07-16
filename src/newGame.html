@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel='stylesheet prefetch' href='css/ewxggx.css'>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
+    <!--GAEGU FONT-->
     <script type="text/javascript">
         var tablero = [
             [],
@@ -31,39 +33,30 @@
         audioMenu.setAttribute('src', 'assets/sounds/menu.wav');
 
         audioMenu.addEventListener('ended', function() {
-        //this.play();
-        if (loopCounter < loopLimit){
-        this.currentTime = 0;
-        this.play();
-        loopCounter++;
-    }
-    
-    }, false);
+            //this.play();
+            if (loopCounter < loopLimit) {
+                this.currentTime = 0;
+                this.play();
+                loopCounter++;
+            }
 
-
-
-    //document.getElementById(playAudio).click();
+        }, false);
 
 
         $(document).ready(function() {
-    //Constructor array tablero
-    for (var i = 0; i < tablero.length; i++) {
-        for (var j = 0; j < 7; j++) {
-            //numeroPos = numeroPos + 1
-            //tablero[i][j] = numeroPos;
-            tablero[i][j] = '';
-        }
-    }
-});
+            //Constructor array tablero
+            for (var i = 0; i < tablero.length; i++) {
+                for (var j = 0; j < 7; j++) {
+                    tablero[i][j] = '';
+                }
+            }
+        });
 
-$(document).ready(function(){
-    //document.getElementById(playAudio).click();
-$("#playAudio").click(function(){
-        audioMenu.play();
-
-
-});
-});
+        $(document).ready(function() {
+            $("#playAudio").click(function() {
+                audioMenu.play();
+            });
+        });
 
         $(document).ready(function() {
             $("#newGame").click(function() {
@@ -86,7 +79,7 @@ $("#playAudio").click(function(){
 
                 sessionStorage.setItem("4line_current_session_ID", generatedGameID);
 
-                localStorage["4line_games_sessions_ID:" + generatedGameID] = JSON.stringify(gamesSessions);//SET
+                localStorage["4line_games_sessions_ID:" + generatedGameID] = JSON.stringify(gamesSessions); //SET
 
                 console.log("[4Line]--> STORED IN LOCALSTORAGE!");
 
@@ -115,44 +108,32 @@ $("#playAudio").click(function(){
                     alert("encontrado!");
                     sessionStorage.setItem("4line_current_session_ID", gameIDKey);
                     var gameURL = "currentGame.html";
-                document.location.href = gameURL;
-
-                    //console.log(storedGames);
+                    document.location.href = gameURL;
                 }
             });
         });
-
-        /*
-                $(document).ready(function(){
-        var names = [];
-        names[0] = prompt("New member name?");
-        localStorage.setItem("names", JSON.stringify(names));
-
-        //...
-         storedNames = JSON.parse(localStorage.getItem("names"));
-                });
-                */
     </script>
 </head>
 
 <body>
-    
+
     <script src='https://rawgit.com/juliangarnier/anime/master/anime.min.js'></script>
     <script src="js/bgGenerator.js"></script>
-    
+
     <div id='contenedor_banner' align="center">
         <img src="assets/4LineBanner.gif" width="600" height="200">
     </div>
     <div id="contenedor_controles" align="center">
-        <p>Ingrese los nombres de los jugadores</p>
+        <p>Ingresa los nombres de los jugadores</p>
         <br>Jugador 1: <input type="text" id="jugador1"></input>
         </br>
         <br>Jugador 2: <input type="text" id="jugador2"></input>
         </br>
         <br><button id="newGame">Comenzar nueva partida!</button></br>
-        <p></p>
+        <br>
+        <br>
         <br>Deseas continuar tu partida anterior?</br>
-        <br>Ingresa tu código de juego!</br>
+        <p>Ingresa tu ID de juego!</p>
         <br>Codigo de juego: <input type="text" id="resumeGameID"></input>
         </br>
         <br><button id="resumeGame">Continuar juego</button></br>

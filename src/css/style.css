@@ -53,6 +53,15 @@ position: absolute;
     font-size: 25px;
 }
 
+#contenedor_controles {
+  font-family: 'Gaegu', regular;
+    font-size: 24px;
+}
+
+#showWinnerName{
+  font-family: 'Gaegu', regular;
+    font-size: 55px;
+}
 
 #boardBody td{
    /*
@@ -98,6 +107,18 @@ height:80px;
     cursor:pointer;
     overflow: hidden;
     outline:none;
+}
+
+#contenedor_win {
+  height: 333px;
+  width: 300px;
+  margin: 0;
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
 }
 /*
 p{

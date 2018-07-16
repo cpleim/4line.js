@@ -8,18 +8,13 @@ var tablero = [
 ];
 
 var player1Name, player2Name, currentGameID, currentLocalStorageContent;
-var numeroPos = 0;
+//var numeroPos = 0;
 var selectedButton, intervaloResultante, playerCode;
 var countButtonPlayer1 = 0;
 var countButtonPlayer2 = 0;
-var currentColumn = 0;
 var buttonState = 0;
-var sumaColumna = 0;
-var player1Column = [];
-var player2Culumn = [];
 var availabeButtons = ['btnFichas0','btnFichas1','btnFichas2','btnFichas3','btnFichas4','btnFichas5','btnFichas6'];
 
-/*EXPERIMENTAL*/
 var turno = 0;
 var idButton;
 var clickCantBtn0 = 0;
@@ -29,7 +24,6 @@ var clickCantBtn3 = 0;
 var clickCantBtn4 = 0;
 var clickCantBtn5 = 0;
 var clickCantBtn6 = 0;
-/**/
 
 /*AUDIO*/
 var placePlayer1 = document.createElement('audio');
@@ -134,10 +128,6 @@ $(document).ready(function() {
 
     //Default turno del jugador1 al empezar la partida
     $('#currentPlayer').text(player1Name);
-
-    //Constructor para el cambio de fichas de jugador
-    var btnSrc;
-    var currentColumn = 0;
 
 /*COMIENZO DEL CONSTRUCTOR DE LOS BOTONES DE JUEGO*/
     $('#buttonFichas0').click(function() {
@@ -671,6 +661,13 @@ function reloadGameBoard() {
     }
 }
 
+function storeWinner(){
+    var currentWinner = $('#currentPlayer').text();
+    sessionStorage.setItem("4line_current_Winner", currentWinner);
+    var gameURL = "Winner.html";
+    document.location.href = gameURL;
+}
+
 function reloadButtonImage() {
     if (buttonState == 1) {
         for (var i = 0; i < availabeButtons.length; i++) {
@@ -744,6 +741,7 @@ function evaluacolumns() {
                 alert("Jugador 1 ha ganado [COLUMNA]");
                 //$('#fichasJugadores').fadeOut();
                 timer.stop();
+                storeWinner();
                 return;
             }
             if (tablero[j][i] == 2) {
@@ -756,6 +754,7 @@ function evaluacolumns() {
                 alert("Jugador 2 ha ganado [COLUMNA]");
                 //$('#fichasJugadores').fadeOut();
                 timer.stop();
+                storeWinner();
                 return;
             }
         }
@@ -778,6 +777,7 @@ function evaluaFilas() {
                 alert("Jugador 1 ha ganado [FILA]");
                 //$('#fichasJugadores').fadeOut();
                 timer.stop();
+                storeWinner();
                 return;
             }
             if (tablero[i][j] == 2) {
@@ -790,6 +790,7 @@ function evaluaFilas() {
                 alert("Jugador 2 ha ganado [FILA]");
                 // $('#fichasJugadores').fadeOut();
                 timer.stop();
+                storeWinner();
                 return;
             }
         }
@@ -804,6 +805,7 @@ function diagonalIzq() {
                 alert("Jugador 1 ha ganado [DIAGIZQ]");
                 // $('#fichasJugadores').fadeOut();
                 timer.stop();
+                storeWinner();
                 return;
             }
             if (tablero[i][j] == 2 && tablero[i - 1][j + 1] == 2 && tablero[i - 2][j + 2] == 2 && tablero[i - 3][j + 3] == 2) {
@@ -811,6 +813,7 @@ function diagonalIzq() {
                 alert("Jugador 2 ha ganado [DIAGIZQ]");
                 // $('#fichasJugadores').fadeOut();
                 timer.stop();
+                storeWinner();
                 return;
             }
         }
@@ -827,6 +830,7 @@ function diagonalDer() {
                 alert("Jugador 1 ha ganado [DIAGDER]");
                 // $('#fichasJugadores').fadeOut();
                 timer.stop();
+                storeWinner();
                 return;
             }
             if (tablero[i][j] == 2 && tablero[i - 1][j - 1] == 2 && tablero[i - 2][j - 2] == 2 && tablero[i - 3][j - 3] == 2) {
@@ -834,6 +838,7 @@ function diagonalDer() {
                 alert("Jugador 2 ha ganado [DIAGDER]");
                 // $('#fichasJugadores').fadeOut();
                 timer.stop();
+                storeWinner();
                 return;
             }
         }

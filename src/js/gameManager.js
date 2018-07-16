@@ -13,7 +13,7 @@ var selectedButton, intervaloResultante, playerCode;
 var countButtonPlayer1 = 0;
 var countButtonPlayer2 = 0;
 var buttonState = 0;
-var availabeButtons = ['btnFichas0','btnFichas1','btnFichas2','btnFichas3','btnFichas4','btnFichas5','btnFichas6'];
+var availabeButtons = ['btnFichas0', 'btnFichas1', 'btnFichas2', 'btnFichas3', 'btnFichas4', 'btnFichas5', 'btnFichas6'];
 
 var turno = 0;
 var idButton;
@@ -24,6 +24,7 @@ var clickCantBtn3 = 0;
 var clickCantBtn4 = 0;
 var clickCantBtn5 = 0;
 var clickCantBtn6 = 0;
+var victoryTimes = 0;
 
 /*AUDIO*/
 var placePlayer1 = document.createElement('audio');
@@ -129,7 +130,7 @@ $(document).ready(function() {
     //Default turno del jugador1 al empezar la partida
     $('#currentPlayer').text(player1Name);
 
-/*COMIENZO DEL CONSTRUCTOR DE LOS BOTONES DE JUEGO*/
+    /*COMIENZO DEL CONSTRUCTOR DE LOS BOTONES DE JUEGO*/
     $('#buttonFichas0').click(function() {
         selectedButton = "btn0-player1";
         idButton = "btnFichas0";
@@ -490,17 +491,17 @@ $(document).ready(function() {
     /*COMIENZO DEL CONSTRUCTOR DE LOS BOTONES DE JUEGO*/
 });
 
-function removeAvailableButton(){
+function removeAvailableButton() {
     for (var i = 0; i < availabeButtons.length; i++) {
-        if(availabeButtons[i] == idButton){
+        if (availabeButtons[i] == idButton) {
             availabeButtons.splice(i, 1);
             return;
         }
     }
 }
 
-function checkForMatch(){
-    if (availabeButtons.length == 0){
+function checkForMatch() {
+    if (availabeButtons.length == 0) {
         alert("EMPATE!");
         return;
     }
@@ -661,9 +662,11 @@ function reloadGameBoard() {
     }
 }
 
-function storeWinner(){
+function storeWinner() {
     var currentWinner = $('#currentPlayer').text();
     sessionStorage.setItem("4line_current_Winner", currentWinner);
+    currentLocalStorageContent[0].currentGameSession.setupData.victoryTimes = currentLocalStorageContent[0].currentGameSession.setupData.victoryTimes + 1;
+    localStorage["4line_games_sessions_ID:" + currentGameID] = JSON.stringify(currentLocalStorageContent); 
     var gameURL = "Winner.html";
     document.location.href = gameURL;
 }
@@ -671,7 +674,7 @@ function storeWinner(){
 function reloadButtonImage() {
     if (buttonState == 1) {
         for (var i = 0; i < availabeButtons.length; i++) {
-           $('img[alt="'+availabeButtons[i]+'"]').attr('src', 'assets/Ficha2.png');
+            $('img[alt="' + availabeButtons[i] + '"]').attr('src', 'assets/Ficha2.png');
         }
         /*
         $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
@@ -681,8 +684,8 @@ function reloadButtonImage() {
     }
 
     if (buttonState == 0) {
-      for (var i = 0; i < availabeButtons.length; i++) {
-           $('img[alt="'+availabeButtons[i]+'"]').attr('src', 'assets/Ficha1.png');
+        for (var i = 0; i < availabeButtons.length; i++) {
+            $('img[alt="' + availabeButtons[i] + '"]').attr('src', 'assets/Ficha1.png');
         }
         /*
         $('img[alt="btnFichas0"]').attr('src', 'assets/Ficha2.png');
@@ -704,13 +707,13 @@ function saveficha() {
         for (var j = intervaloResultante - 1; j < 7; j++) {
             if (tablero[i][j] == "") {
                 tablero[i][j] = playerCode;
-                if (turno == 0){
-                  gameBoard.rows[i].cells[j].innerHTML = fichita1; 
-                  return; 
+                if (turno == 0) {
+                    gameBoard.rows[i].cells[j].innerHTML = fichita1;
+                    return;
                 }
-                if(turno == 1){
-                    gameBoard.rows[i].cells[j].innerHTML = fichita2; 
-                return;
+                if (turno == 1) {
+                    gameBoard.rows[i].cells[j].innerHTML = fichita2;
+                    return;
                 }
                 //reloadGameBoard();
                 return;

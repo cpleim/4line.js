@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>4Line - Fin del juego</title>
+    <link rel="shortcut icon" href="assets/4LineBanner.gif" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <!--jQuery-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet prefetch' href='css/ewxggx.css'>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
+    <!--GAEGU FONT-->
+</head>
+<script type="text/javascript">
+        var retrievedLocalStorageData = [];
+    var usedGameIDs;
+    $(document).ready(function(){
+
+    usedGameIDs = JSON.parse(localStorage["4line_usedIDs:"]);
+
+    for (var i = 0; i < usedGameIDs.length; i++) {
+        var buildedLocalStorageKey = "4line_games_sessions_ID:" + usedGameIDs[i];
+        retrievedLocalStorageData = JSON.parse(localStorage[buildedLocalStorageKey]);
+    }
+});
+</script>
+
+<body>
+
+    <script src='https://rawgit.com/juliangarnier/anime/master/anime.min.js'></script>
+    <script src="js/bgGenerator.js"></script>
+
+    <div id='contenedor_banner' align="center">
+        <img src="assets/4LineBanner.gif" width="600" height="200">
+    </div>
+
+
+    <div id='contenedor_login'>
+        <img src="assets/divLogin.png" width="400" height="500">
+    </div>
+</body>
+
+</html>
